@@ -1,0 +1,68 @@
+{
+  "system": {
+    "mode": "backtest",
+    "theme": "dark",
+    "log_level": "INFO",
+    "server_port": 8765
+  },
+  "ai": {
+    "provider": "deepseek",
+    "api_key": "",
+    "base_url": "https://api.deepseek.com/v1",
+    "model": "deepseek-chat",
+    "temperature": 0.3,
+    "timeout": 60,
+    "enable_tools": true
+  },
+  "data": {
+    "primary_source": "eastmoney",
+    "realtime_ttl": 30,
+    "kline_ttl": 3600,
+    "adjust": "qfq",
+    "validate_data": true
+  },
+  "backtest": {
+    "initial_cash": 1000000,
+    "slippage": 0.001,
+    "commission_rate": 0.00025,
+    "benchmark": "000300",
+    "k_folds": 5
+  },
+  "risk": {
+    "max_position_pct": 0.2,
+    "max_total_pct": 0.8,
+    "max_drawdown_pct": 0.15,
+    "max_daily_loss_pct": 0.02,
+    "block_st": true,
+    "whitelist_only": false
+  },
+  "compliance": {
+    "max_order_value": 2000000,
+    "max_daily_orders": 50,
+    "trading_hours_only": true,
+    "audit_enabled": true,
+    "blacklist": ""
+  },
+  "execution": {
+    "broker": "qmt",
+    "qmt_path": "",
+    "account_id": "",
+    "require_confirm": true
+  },
+  "selector": {
+    "default_topn": 10,
+    "momentum_fetch_n": 60,
+    "max_pe": 60,
+    "min_amount_yi": 1,
+    "w_momentum": 0.35,
+    "w_valuation": 0.25,
+    "w_liquidity": 0.2,
+    "w_quality": 0.2
+  },
+  "notify": {
+    "channel": "none",
+    "webhook_url": "",
+    "on_circuit_break": true,
+    "on_strategy_retire": true
+  }
+}

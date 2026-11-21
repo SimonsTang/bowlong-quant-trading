@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+cache/
+logs/
+*.log
+.DS_Store
+config/system.local.json
+.workbuddy/
+_publish/
+*.tmp

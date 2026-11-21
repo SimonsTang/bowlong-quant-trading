@@ -1,0 +1,72 @@
+{
+  "started_at": "2026-11-20 13:53:55",
+  "mode": "paper",
+  "gateway": "miniQMT / xtquant",
+  "steps": [
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "预检 0/6：模式合法性",
+      "status": "OK",
+      "detail": "paper"
+    },
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "预检 1/6：xtquant SDK",
+      "status": "INFO",
+      "detail": "检测中"
+    },
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "预检 1/6：xtquant SDK",
+      "status": "FAIL",
+      "detail": "未安装 (No module named 'xtquant')；需 pip install xtquant，且该包通常由券商提供/授权"
+    },
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "预检 2/6：QMT 路径与资金账号",
+      "status": "FAIL",
+      "detail": "path=空 account=空"
+    },
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "预检 3/6：QMT userdata 目录",
+      "status": "FAIL",
+      "detail": "未提供"
+    },
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "检测 miniQMT 进程",
+      "status": "FAIL",
+      "detail": "未发现 miniQMT 进程"
+    },
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "预检 4/6：miniQMT 登录状态",
+      "status": "FAIL",
+      "detail": "未运行，请先启动并登录 miniQMT「独立交易模式」"
+    },
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "预检 5/6：交易时段",
+      "status": "OK",
+      "detail": "交易时段内"
+    },
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "预检 6/6：显式风险确认",
+      "status": "FAIL",
+      "detail": "paper 模式必须带 --i-understand，确认你用的是券商模拟账号"
+    },
+    {
+      "ts": "2026-11-20 13:53:55",
+      "step": "执行失败",
+      "status": "FAIL",
+      "detail": "RuntimeError: 预检未通过，按安全策略终止；未产生任何委托"
+    }
+  ],
+  "ok": false,
+  "result": {},
+  "error": "RuntimeError: 预检未通过，按安全策略终止；未产生任何委托",
+  "finished_at": "2026-11-20 13:53:55",
+  "elapsed_sec": 0.35
+}

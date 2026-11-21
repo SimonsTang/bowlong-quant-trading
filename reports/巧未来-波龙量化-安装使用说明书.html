@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>巧未来-波龙量化 · 安装使用说明书 v1.6</title>
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#1f2329;--sub:#5b6472;--line:#e5e8ed;--up:#d9363e;--down:#2ea121;--accent:#1f5fbf;--accent2:#e8f0fb;--warn:#b8860b;--warnbg:#fff8e6;--darkbg:#0f1c33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.78;font-size:15px}
+.wrap{max-width:1120px;margin:0 auto;padding:26px 20px 80px}
+header{background:linear-gradient(120deg,#12356b,#1f5fbf);color:#fff;border-radius:14px;padding:34px 40px;box-shadow:0 6px 24px rgba(20,60,130,.18)}
+header h1{margin:0 0 6px;font-size:30px;letter-spacing:.5px}
+header .meta{opacity:.9;font-size:13px;line-height:1.9}
+header .tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:2px 12px;font-size:12px;margin:8px 6px 0 0}
+.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 26px;margin:20px 0;columns:2;column-gap:36px}
+.toc a{color:var(--accent);text-decoration:none;font-size:14px;display:block;padding:3px 0;break-inside:avoid}
+.toc a:hover{text-decoration:underline}
+h2{font-size:21px;margin:40px 0 14px;padding:9px 0 9px 14px;border-left:5px solid var(--accent);background:linear-gradient(90deg,#eef3fb,transparent)}
+h3{font-size:16px;margin:22px 0 8px;color:#233a5e}
+h4{font-size:14px;margin:14px 0 6px;color:#2b3a55}
+p{margin:9px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 24px;margin:14px 0;box-shadow:0 2px 8px rgba(20,40,80,.04)}
+.tldr{background:linear-gradient(135deg,#fff,#f0f5fd);border-left:5px solid var(--accent)}
+.note{background:var(--warnbg);border-left:4px solid var(--warn);padding:12px 16px;border-radius:8px;margin:12px 0;font-size:14px}
+.danger{background:#fff2f2;border-left:4px solid var(--up);padding:12px 16px;border-radius:8px;margin:12px 0;font-size:14px;color:#7d2020}
+.ok{background:#eefaf1;border-left:4px solid var(--down);padding:12px 16px;border-radius:8px;margin:12px 0;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+.kpi .lbl{font-size:12px;color:var(--sub)}
+.kpi .val{font-size:21px;font-weight:700;margin-top:3px}
+.red{color:var(--up)!important}.green{color:var(--down)!important}.blue{color:var(--accent)!important}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:12px 0;background:#fff}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#eef3fa;color:#233a5e;font-weight:600}
+tr:nth-child(even) td{background:#fafbfd}
+code{background:#eef1f5;padding:1px 5px;border-radius:4px;font-size:12.5px;color:#b03060;font-family:Consolas,Monaco,monospace}
+.formula{background:var(--darkbg);color:#d8e6ff;border-radius:10px;padding:16px 20px;font-family:Consolas,Monaco,monospace;font-size:13.5px;overflow-x:auto;line-height:1.7;margin:12px 0}
+pre{background:var(--darkbg);color:#d8e6ff;border-radius:10px;padding:16px 20px;overflow-x:auto;font-size:13px;line-height:1.7}
+.step{counter-reset:s}
+.step .s{position:relative;padding:10px 14px 10px 52px;border-bottom:1px dashed var(--line)}
+.step .s:before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:11px;width:26px;height:26px;background:var(--accent);color:#fff;border-radius:50%;text-align:center;line-height:26px;font-size:13px;font-weight:700}
+.step .s:last-child{border-bottom:0}
+.badge{display:inline-block;background:var(--accent2);color:var(--accent);border-radius:5px;padding:1px 8px;font-size:11px;margin-left:6px}
+.badge.g{background:#eefaf1;color:var(--down)}
+.badge.r{background:#fff0f0;color:var(--up)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:14px 0;font-size:13px}
+.flow .n{background:#eef3fa;border:1px solid #c9d8ee;border-radius:8px;padding:6px 11px;color:#233a5e}
+.flow .a{color:var(--accent);font-weight:700}
+.disclaimer{background:#fff4f4;border:1px solid #f0c9c9;color:#8b2e2e;border-radius:10px;padding:16px 20px;margin-top:34px;font-size:13px}
+footer{text-align:center;color:var(--sub);font-size:12px;margin-top:26px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.two,.toc{grid-template-columns:1fr;columns:1}header h1{font-size:23px}}
+ul,ol{padding-left:24px;margin:8px 0}li{margin:5px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>巧未来-波龙量化 · 安装使用说明书</h1>
+  <div class="meta">版本 v1.6 · 编制日期 2026-11-20 · 适用对象：量化研究者 / 个人投资者 / 团队研究<br>
+  全链路真实数据 · 零模拟数据 · 零随机数 · 研究 + 回测 + 风控 + 合规 + 多市场执行路由 + AI 助手</div>
+  <div>
+    <span class="tag">Windows 双击即用</span><span class="tag">零第三方依赖</span><span class="tag">浏览器终端</span>
+    <span class="tag">13 交易策略</span><span class="tag">10 选股策略</span><span class="tag">期货/期权/ETF</span>
+  </div>
+</header>
+
+<div class="card tldr">
+<h2 style="margin-top:0;border:0;background:none;padding:0">〇、一页读懂：三句话 + 三步上手</h2>
+<p><b>这是什么？</b>一套跑在你自己电脑上的量化研究终端：本地 Python 服务 + 浏览器界面。它用东方财富/腾讯/新浪的<b>真实行情</b>做行情浏览、全市场选股、策略回测、组合回测、参数寻优、一条龙工作流，并预留 QMT/CTP 实盘执行路由与合规审计。它<b>不荐股、不承诺收益、默认不真实下单</b>。</p>
+<div class="kpis">
+  <div class="kpi"><div class="lbl">功能页</div><div class="val blue">10 个</div></div>
+  <div class="kpi"><div class="lbl">交易择时策略</div><div class="val">13 个</div></div>
+  <div class="kpi"><div class="lbl">全市场选股角度</div><div class="val">10 个</div></div>
+  <div class="kpi"><div class="lbl">覆盖品种</div><div class="val">A股/ETF/期货/期权</div></div>
+  <div class="kpi"><div class="lbl">默认运行模式</div><div class="val green">paper 校验</div></div>
+  <div class="kpi"><div class="lbl">访问地址</div><div class="val" style="font-size:16px">127.0.0.1:8765</div></div>
+</div>
+<p><b>三步上手：</b>① 双击项目根目录 <code>start.bat</code> → ② 浏览器打开 <code>http://127.0.0.1:8765</code> → ③ 左侧「实时行情」输入 <code>600519</code> 点「查询行情」看真实 K 线和 F10。</p>
+</div>
+
+<div class="toc">
+<a href="#s1">一、系统定位与核心原则</a>
+<a href="#s2">二、安装与启动</a>
+<a href="#s3">三、首次配置引导</a>
+<a href="#s4">四、界面总览（10 页地图）</a>
+<a href="#s5">五、逐页使用指南（重点）</a>
+<a href="#s6">六、三个典型工作流实战</a>
+<a href="#s7">七、实测效果（真实数据）</a>
+<a href="#s8">八、已知不足与能力边界</a>
+<a href="#s9">九、注意事项与风险提示</a>
+<a href="#s10">十、常见问题排查 FAQ</a>
+<a href="#s11">附录 A：命令行脚本</a>
+<a href="#s12">附录 B：数据源与降级链</a>
+<a href="#s13">附录 C：目录结构</a>
+<a href="#s14">免责声明</a>
+</div>
+
+<h2 id="s1">一、系统定位与核心原则</h2>
+<div class="card">
+<h3>1.1 它解决什么问题</h3>
+<p>传统量化工具常见三个短板：数据口径不统一、回测偷偷用随机数或未来函数、连接失败静默切换成模拟数据却让你以为是真实结果。本系统从设计上堵住这三点，并把「研究 → 回测 → 风控 → 合规 → 执行意图」串成可观测的一条链。</p>
+<table>
+<tr><th>你能做的事</th><th>在哪个页面</th><th>数据来源</th></tr>
+<tr><td>看真实 K 线、成交量、均线、F10 基本面</td><td>实时行情</td><td>东财/腾讯/新浪真实行情</td></tr>
+<tr><td>从全市场 5500+ 只股票按 10 种角度选股</td><td>全市场选股</td><td>真实快照 + 真实历史 K 线</td></tr>
+<tr><td>用 13 个经典策略回测单只股票、看净值/回撤/交易流水</td><td>回测中心</td><td>真实前复权日 K + 真实费用</td></tr>
+<tr><td>多策略对比、多标的组合回测、参数自动寻优</td><td>回测中心</td><td>同上</td></tr>
+<tr><td>选股 → 组合 → 风控 → 合规 → 实盘意图一键跑通</td><td>全链路工作流</td><td>真实数据，SSE 实时观测</td></tr>
+<tr><td>期货/期权/ETF 行情、成本测算、多品种回测</td><td>多市场品种</td><td>东财真实合约数据</td></tr>
+<tr><td>用自然语言查询数据、编排回测、复盘</td><td>AI 助手</td><td>云端 API（可选）+ 真实工具</td></tr>
+</table>
+<h3>1.2 五条不可动摇的核心原则</h3>
+<ol>
+<li><b>一律真实数据</b>：任何数据源失败都明确抛错或降级到标注了来源的缓存，绝不伪造价格、绝不用随机数喂回测。</li>
+<li><b>防未来函数</b>：信号在 T 日收盘产生、成交在 T+1 开盘，回测与实盘共用同一套引擎（<code>core/research/engine.py</code>）。</li>
+<li><b>稳健优先于漂亮</b>：参数不在样本内取最优，用 K 段折外稳健分 <code>0.6×中位数 + 0.4×最差段</code> 抑制过拟合。</li>
+<li><b>实盘边界严格</b>：默认 <code>paper/validate</code> 模式只校验不报单；只有显式切到 <code>live</code> 且配齐 QMT 才可能真实下单。</li>
+<li><b>结果可追溯</b>：每只入选股记录各因子原始值与打分明细，回测含完整交易流水，合规有 append-only 审计日志。</li>
+</ol>
+<div class="note"><b>谁适合用：</b>想验证策略想法、做真实数据研究和模拟盘演练的个人与团队。<b>谁不适合：</b>期待「输入资金自动赚钱」的人——本系统不做 AI 荐股、不承诺收益，期货/期权/港股实盘亦未完全接通（见第八章）。</div>
+</div>
+
+<h2 id="s2">二、安装与启动</h2>
+<div class="card">
+<h3>2.1 环境要求</h3>
+<table>
+<tr><th>项目</th><th>要求</th><th>说明</th></tr>
+<tr><td>操作系统</td><td>Windows 10/11（推荐）</td><td>核心为 Python 标准库，理论上 macOS/Linux 亦可运行 <code>web/server.py</code>，但 <code>start.bat</code> 是 Windows 脚本</td></tr>
+<tr><td>Python</td><td>3.10+，3.13 已验证</td><td><b>零第三方依赖</b>——不需要 pip install 任何包即可跑 Web 终端</td></tr>
+<tr><td>浏览器</td><td>Chrome / Edge / QQ 浏览器等现代浏览器</td><td>界面用 Canvas 绘图，需支持 HTML5</td></tr>
+<tr><td>网络</td><td>能访问东方财富/腾讯/新浪公开行情接口</td><td>首次拉全市场快照约 30–90 秒</td></tr>
+<tr><td>实盘可选</td><td>券商 miniQMT 权限 + <code>pip install xtquant</code></td><td>仅 live 模式需要；默认校验模式完全不需要</td></tr>
+</table>
+<h3>2.2 Windows 一键启动（推荐）</h3>
+<div class="step">
+<div class="s">下载/解压项目到本地目录，例如 <code>D:\qiaoweilai-bowlong-quant</code>。路径尽量不要有中文和空格以免个别脚本出问题。</div>
+<div class="s">进入项目根目录，<b>双击 <code>start.bat</code></b>。脚本会自动探测可用 Python：优先 WorkBuddy 内置解释器，其次常见安装路径，最后跳过微软商店的 <code>WindowsApps\python.exe</code> 占位符。</div>
+<div class="s">看到命令行显示 <code>Starting server ... Open http://127.0.0.1:8765</code> 即成功；脚本不会自动关窗口，<b>关闭该窗口即停止服务</b>。</div>
+<div class="s">浏览器打开 <code>http://127.0.0.1:8765</code>，看到终端界面即启动成功。</div>
+</div>
+<div class="ok"><b>这些提示都是正常的，不是失败：</b>① 出现 <code>[OK] The terminal is already running and healthy.</code> 并自动打开浏览器——说明服务已在运行，无需重复启动。② 端口 8765 被占用时脚本会先做健康检查，健康就直接开浏览器，被别的程序占用才提示停掉它或修改 <code>web/server.py</code> 里的端口。</div>
+<h3>2.3 命令行启动（任意系统 / 调试用）</h3>
+<pre># 在项目根目录执行
+python web/server.py
+# 然后浏览器打开 http://127.0.0.1:8765
+
+# 若系统 python 指向微软商店占位符会闪退，请写全路径，例如：
+C:\Users\Administrator\.workbuddy\binaries\python\versions\3.13.12\python.exe web\server.py
+
+# 判断服务是否起来（返回 JSON 即成功）
+curl http://127.0.0.1:8765/api/status</pre>
+<div class="danger"><b>最常见的启动失败：</b>命令行直接敲 <code>python web/server.py</code> 时窗口一闪而过——多半是 <code>python</code> 命中了微软商店的占位程序。解决：改用 <code>start.bat</code>，或写出真实 Python 的完整路径。</div>
+<h3>2.4 停止服务与端口</h3>
+<p>直接关闭运行服务的命令行窗口（或在窗口内按 <code>Ctrl+C</code>）即可停止。默认端口 <code>8765</code>，如需修改，改 <code>web/server.py</code> 中的端口并同步修改 <code>start.bat</code> 里的健康检查地址与浏览器地址。启动脚本已内置「端口占用→健康检查」逻辑，重复双击不会重复起服务。</p>
+</div>
+
+<h2 id="s3">三、首次配置引导</h2>
+<div class="card">
+<p>首次打开时若配置未完成，会弹出「欢迎使用」引导浮层，列出待办项。可以点「跳过」先用起来——<b>所有功能在不配置 AI 的情况下也能运行</b>（AI 助手会降级为本地工具直答）。</p>
+<h3>3.1 配置中心在哪、怎么改</h3>
+<p>左侧最下方「系统配置」进入。它是 schema 驱动的动态表单，共 9 个分组；改完点「保存并生效」，<b>即时热更新、无需重启服务</b>。密钥类字段界面脱敏显示（如 <code>sk-****def</code>），可点「显示」切换明文。切换分组前会自动缓存当前页未保存的修改，不会静默丢失。</p>
+<table>
+<tr><th>分组</th><th>关键项</th><th>为什么重要</th></tr>
+<tr><td>系统</td><td><code>mode</code>：backtest / paper / live；端口、主题、日志级别</td><td>运行模式总开关，切 live 会弹二次风险确认</td></tr>
+<tr><td>AI 接口</td><td>provider、api_key、base_url、model、temperature、enable_tools</td><td>填完点「测试连接」验证，再保存</td></tr>
+<tr><td>数据源</td><td>主源(eastmoney/tencent/sina)、缓存 TTL、复权方式、脏数据校验</td><td>默认东财，失败自动降级到腾讯/新浪</td></tr>
+<tr><td>回测</td><td>初始资金(默认100万)、滑点、佣金、基准、折数</td><td>直接影响所有回测的绩效数字</td></tr>
+<tr><td>风控</td><td>单票仓位上限、总仓位、回撤熔断、日内亏损熔断、ST 过滤</td><td>控制风险敞口</td></tr>
+<tr><td>合规</td><td>单笔金额/日内次数上限、交易时段、审计留痕、禁投池</td><td>机构级合规闸</td></tr>
+<tr><td>执行</td><td>broker(qmt/ctp/hk/validate)、QMT 路径、账户ID、二次确认</td><td>实盘才需要；默认 validate 不报单</td></tr>
+<tr><td>选股</td><td>默认选股数、历史精算池、最小成交额、各因子权重(兼容旧版)</td><td>各策略的实际阈值在「全市场选股」页动态设置</td></tr>
+<tr><td>通知</td><td>渠道(none/webhook/email)、熔断/退役告警</td><td>需要时才配</td></tr>
+</table>
+<h3>3.2 接入云端 AI（可选但推荐）</h3>
+<div class="step">
+<div class="s">进入「系统配置 → 🤖 AI 接口」。</div>
+<div class="s">选择服务商（DeepSeek / 通义 / 智谱 / Moonshot / OpenAI / Ollama / 自定义），填入 API Key、Base URL、模型名。</div>
+<div class="s">点击 API Key 输入框下方的「测试连接」，看到「✓ 连接成功」再点「保存并生效」。</div>
+</div>
+<p>也可用环境变量覆盖（优先级高于界面，适合容器化）：</p>
+<pre>set QIAO_AI__API_KEY=你的密钥
+set QIAO_AI__BASE_URL=https://api.deepseek.com/v1
+set QIAO_AI__MODEL=deepseek-chat</pre>
+<div class="note">环境变量命名规则：前缀 <code>QIAO_</code> + 分组大写 + 双下划线 + 键大写，例如 <code>QIAO_BACKTEST__INITIAL_CASH</code>。未配置 AI 时，助手自动降级为本地工具直答，功能不中断，只是没有自然语言理解能力。</div>
+<h3>3.3 运行模式怎么选</h3>
+<ul>
+<li><b>backtest（回测）</b>：只做历史回测与研究，不涉及任何实盘概念。新手建议从此开始。</li>
+<li><b>paper（模拟/校验，默认）</b>：系统默认模式。全链路与一条龙只生成 <code>VALIDATED_ONLY</code> 委托意图，<b>绝不真实报单</b>。</li>
+<li><b>live（实盘）</b>：切到该模式会弹窗二次确认并校验 QMT 路径/账户；顶部徽章变红警示。<b>没有券商权限和充分模拟验证前不要切换。</b></li>
+</ul>
+</div>
+
+<h2 id="s4">四、界面总览（10 页地图）</h2>
+<div class="card">
+<p>左侧导航栏自上而下共 10 个功能页，顶栏显示当前模式徽章与数据源在线状态。各页职责如下：</p>
+<table>
+<tr><th>页面</th><th>一句话用途</th><th>什么时候用</th></tr>
+<tr><td>◫ 总览仪表盘</td><td>数据源健康、结果回报中心、能力矩阵、实时运行窗口</td><td>打开系统第一眼，看全局状态和上次运行结果</td></tr>
+<tr><td>📈 实时行情</td><td>6 周期真实 K 线 + 成交量 + 3 条可调均线 + F10</td><td>研究单只股票，看图形和基本面</td></tr>
+<tr><td>🌐 多市场品种 NEW</td><td>期货/期权/ETF 快照、成本测算、多品种回测</td><td>研究非股票品种</td></tr>
+<tr><td>⚙ 策略库</td><td>13 个交易择时策略卡片与参数</td><td>决定「何时买卖」，参数带入回测等</td></tr>
+<tr><td>🎯 全市场选股</td><td>10 个选股角度、动态参数、结果明细</td><td>决定「买哪些股票」</td></tr>
+<tr><td>🧪 回测中心</td><td>单策略回测、多策略对比、组合回测、参数寻优</td><td>验证策略与参数是否有效</td></tr>
+<tr><td>🔗 全链路工作流</td><td>单标的 10 步流水线 + 选股一条龙</td><td>端到端跑一遍并实时观测</td></tr>
+<tr><td>🛡 风控与合规</td><td>执行模式、合规规则、策略守护、审计日志</td><td>检查风险控制状态</td></tr>
+<tr><td>🤖 AI 助手</td><td>自然语言查询/编排/复盘</td><td>配好 AI 后辅助分析</td></tr>
+<tr><td>⚙ 系统配置</td><td>9 组配置、连接测试、完成度检查</td><td>首次使用与随时调整</td></tr>
+</table>
+<div class="note"><b>最容易混淆的两页：</b>「策略库」13 个是<b>交易择时策略</b>（何时买卖），用于回测中心/全链路；「全市场选股」10 个是<b>选股策略</b>（买什么），只用于选股打分。两者通过「全链路 → 选股一条龙」衔接。</div>
+</div>
+
+<h2 id="s5">五、逐页使用指南（重点）</h2>
+
+<h3>5.1 总览仪表盘</h3>
+<div class="card">
+<ul>
+<li><b>数据源健康监控</b>：实时探测东财/腾讯/新浪三源是否在线，显示在线数。若某源离线会自动走备源，这里能看到状态。</li>
+<li><b>结果回报中心</b>：显示最近一次运行的绩效与净值曲线，结果落盘持久化（<code>reports/last_result.json</code>），刷新页面或重启服务都不丢失；有「刷新结果」按钮从服务端重载。</li>
+<li><b>系统能力矩阵</b>：列出版块与版本信息。</li>
+<li><b>实时运行窗口</b>：底部 LIVE STREAM 区域滚动显示各长任务的进度与日志，任何耗时操作都在这里同步反馈。</li>
+</ul>
+</div>
+
+<h3>5.2 实时行情（K 线 / 成交量 / 均线 / F10）</h3>
+<div class="card">
+<div class="step">
+<div class="s">在「股票代码」输入框键入代码（如 <code>600519</code>，支持 6 位纯代码或 <code>600519.SH</code>），点「查询行情」；也可点快捷按钮五粮液/中国平安/宁德时代。</div>
+<div class="s">上方四张小卡片显示现价、涨跌幅、成交量、成交额等实时快照。</div>
+<div class="s">「真实K线」区默认日 K，可切换 <b>日K / 周K / 月K / 60分 / 30分 / 5分</b> 六种周期；图上是蜡烛图 + 下方成交量副图。</div>
+<div class="s">「均线」处有三个输入框 <code>MA1/MA2/MA3</code>（默认 5/10/20，范围 2–120），<b>输入数字即时重绘</b>，颜色分别为橙/紫/青。</div>
+<div class="s">光标不在输入框时，按键盘 <b>← →</b> 左右平移 K 线，<b>↑ ↓</b> 缩放显示根数；点「复位视图」一键回到最新 60 根。后端返回最近 1000 根真实 K 线以保证平移空间。</div>
+<div class="s">下方「F10 基本信息」自动加载公司概况（约 40 字段）与 PE/PB/市值/换手率估值——查询行情后无需额外操作。</div>
+</div>
+<div class="note"><b>涨跌颜色遵循 A 股习惯：红涨绿跌。</b>ETF（如 <code>510300</code>）也能查 K 线，但东财不提供 ETF 的 F10 公司概况，F10 区会显示「-」——这是真实数据边界，不是故障。若 K 线或 F10 显示「加载失败」，多为数据源临时限流，等待几秒刷新即可，系统已内置重试与三源降级。</div>
+</div>
+
+<h3>5.3 多市场品种（期货 / 期权 / ETF）</h3>
+<div class="card">
+<div class="step">
+<div class="s">「品种类别」下拉选择：期货主连（上期所/大商所/郑商所/中金所）、ETF 场内基金、ETF 期权（上交所）。</div>
+<div class="s">在「合约」列表中点击选择具体合约，右侧「实时快照」自动加载真实行情。</div>
+<div class="s">「成本测算」输入价格与数量点「测算」：期货按<b>保证金×乘数 + 按手手续费</b>（T+0 双向），期权按<b>权利金×乘数 + 按张手续费</b>（T+0 双向），ETF 免印花税（T+1）。</div>
+<div class="s">「真实K线 + 多品种回测」设快线/慢线（默认 5/20），点「运行回测」跑均线交叉策略，含真实 K 线与防未来函数。</div>
+</div>
+<div class="note">实盘执行默认校验模式，不产生真实委托。期权单合约历史受生命周期限制（往往只有几个月），长周期回测会受限——这是真实边界。</div>
+</div>
+
+<h3>5.4 策略库（13 个交易择时策略）</h3>
+<div class="card">
+<p>这里回答「何时买卖」。13 个策略：<b>双均线、MACD、海龟通道突破、Dual Thrust 区间突破、ATR 通道、布林带均值回归、RSI、KDJ、N 日动量、双动量轮动、多因子(RPS)、配对交易、网格交易</b>。全部按公开经典原理自研实现，无 GPL 许可风险。</p>
+<div class="step">
+<div class="s">点击策略卡片选中，下方「参数调节」区自动显示该策略的可调参数（如双均线的快/慢线天数）。</div>
+<div class="s">调整参数后，这些值会<b>自动带入</b>「回测中心」单标的回测、稳健性检验、组合回测择时信号、全链路工作流；多策略对比则用各策略默认参数以保证公平。</div>
+<div class="s">参数不在样本内取最优——系统用 K 段折外稳健分抑制过拟合；寻优结果可一键回写到本页参数面板。</div>
+</div>
+</div>
+
+<h3>5.5 全市场选股（10 个角度，参数随策略切换）</h3>
+<div class="card">
+<p>这里回答「买什么」。10 个策略各有独立理论与参数，<b>每选一个策略，参数区只显示它真正用到的阈值</b>：</p>
+<table>
+<tr><th>策略</th><th>选股角度</th><th>专属参数（界面动态显示）</th></tr>
+<tr><td>价值选股</td><td>低 PE + 低 PB，安全边际</td><td>PE上限 / PB上限 / PE权重</td></tr>
+<tr><td>成长选股</td><td>营收 + 净利同比双高</td><td>营收同比下限 / 净利同比下限 / 营收权重</td></tr>
+<tr><td>动量选股</td><td>近期涨幅领先、趋势强</td><td>动量回看日 / 今日涨幅上限 / 历史动量权重</td></tr>
+<tr><td>反转选股</td><td>超跌但基本面健康</td><td>ROE下限 / ROE评分上界 / 超跌因子权重</td></tr>
+<tr><td>质量选股</td><td>高 ROE + 合理估值</td><td>ROE下限 / PE上限 / ROE权重</td></tr>
+<tr><td>低波动选股</td><td>低波动 + 低换手</td><td>日波动率上界 / 换手率上界 / 波动率权重</td></tr>
+<tr><td>资金流选股</td><td>主力资金净流入</td><td>净流入评分上界 / 资金流权重</td></tr>
+<tr><td>多因子综合</td><td>动量/估值/流动性/质量四维</td><td>PE评分上界 / 换手率上下限 / 动量权重</td></tr>
+<tr><td>小盘风格</td><td>中小市值 + 流动性(SMB)</td><td>市值下限 / 市值上限 / 规模权重</td></tr>
+<tr><td>技术面共振</td><td>均线多头 + MACD + RSI</td><td>RSI超买线 / 均线权重</td></tr>
+</table>
+<div class="step">
+<div class="s">在「选股策略」区点击卡片即<b>单选切换</b>策略；也可直接点卡片右下角「用此策略选股」，或用下方统一按钮（按钮文字随选中策略变化）。选中的策略会自动同步到「选股一条龙」。</div>
+<div class="s">在「策略专属参数」区调整该策略阈值；「通用设置」里设选股数（3–30）、最小成交额（亿）、历史精算池（仅动量/反转/低波/技术/多因子等需要历史 K 线的策略用）。</div>
+<div class="s">点「▶ 执行全市场选股」。首次会从新浪拉全市场约 5600 只真实快照（约 30–90 秒），之后走缓存。界面持续显示进度状态文字与进度条，运行日志同步到底部窗口；<b>5 分钟无响应会提示超时</b>。</div>
+<div class="s">结果表给出：排名、代码、名称、现价、综合分、<b>策略因子明细</b>、目标权重、选股理由。可点「送入一条龙 →」复用这批结果做组合回测，不重复扫描。</div>
+</div>
+<div class="note"><b>为什么要「历史精算池」？</b>需要历史数据的策略（动量/反转/低波等）只对快照靠前的若干只票拉真实日 K 精算，避免对 5000+ 只全部拉历史导致过慢；最终只从真实算过历史的池子里选股。所以调大这个值会更慢但覆盖更全。数据不足时结果会明确标注警告，不伪造。</div>
+</div>
+
+<h3>5.6 回测中心</h3>
+<div class="card">
+<h4>① 单策略回测</h4>
+<p>输入代码、选策略，点「运行回测」→ 绩效八宫格（总收益/年化/最大回撤/夏普/胜率/交易次数等）、净值曲线、最近 40 笔交易流水。点「稳健性检验」→ K 段折外稳健性结果。</p>
+<h4>② 多策略对比分析</h4>
+<p>输入对比标的，点「运行多策略对比」→ 默认前 8 个策略并列回测，按夏普比率排序，看哪个策略在同一标的上更合适。</p>
+<h4>③ 多标的组合回测</h4>
+<p>填逗号分隔的多个代码、选策略、信号模式（<b>策略择时</b> / <b>选股权重持有</b>）、再平衡周期（日/周/月/不调仓），点「运行组合回测」→ 组合净值、成分贡献、相关性矩阵、换手率与平均暴露。真实 K 线对齐后按 T+1 开盘执行，含佣金/印花税/滑点。</p>
+<h4>④ 参数自动寻优</h4>
+<p>设标的、策略、K 段数、组合上限、排序依据（折外稳健分 / 样本内夏普 / 样本内收益），点「开始寻优」→ 网格搜索，按 <code>0.6×各段收益中位 + 0.4×最差段</code> 排序，结果可一键回写策略库参数。样本内绩效仅作参考。</p>
+<div class="note">所有回测都遵循 T+1、涨跌停不可成交、100 股整手、A 股真实费用（佣金/印花税/滑点）。回测收益不代表未来——详见第七章实测中的反面案例。</div>
+</div>
+
+<h3>5.7 全链路工作流</h3>
+<div class="card">
+<h4>① 单标的 10 步流水线</h4>
+<p>输入代码、选策略，点「▶ 启动全链路」。数据在「实时运行窗口」逐步推送：数据 → 统一口径 → 策略 → 稳健检验 → 回测 → 策略守护 → 风控 → 合规 → 多市场执行路由 → AI 复盘。右侧「流水线步骤与结果」显示每步状态与结果。</p>
+<h4>② 选股一条龙</h4>
+<p>选股策略、入选数量、组合再平衡、动量拉取上限，点「▶ 启动选股一条龙」。8 步：<b>选股 → 组合回测 → 折外稳健 → 风控 → 合规 → 实盘意图(VALIDATED_ONLY) → AI 复盘</b>。若已在上页选股，点「送入一条龙」可直接复用结果，不必重扫全市场。<b>此流程只生成意图，绝不真实报单。</b></p>
+</div>
+
+<h3>5.8 风控与合规</h3>
+<div class="card">
+<ul>
+<li><b>执行模式</b>：显示当前是 VALIDATE（只校验）还是 LIVE；默认 VALIDATE。</li>
+<li><b>合规规则</b>：预交易闸（禁投池/限额/交易时段/审计留痕）。</li>
+<li><b>策略守护</b>：健康 / 观察 / 退役三态监控，回撤或连败触发后需人工确认重启。</li>
+<li><b>合规审计日志</b>：append-only 留存每笔决策的时间、标的、方向、数量、金额、决策、原因。</li>
+</ul>
+</div>
+
+<h3>5.9 AI 助手</h3>
+<div class="card">
+<p>配好 AI 后在「AI 助手」页直接对话：可查询真实行情、运行回测、全市场选股、分析策略表现、查看风控合规状态。界面右上角标注当前是「云端 API」还是「本地降级」。AI 通过 function-calling 调用 7 大工具，所有数字来自真实工具结果，<b>不做主观荐股、不承诺收益</b>。</p>
+</div>
+
+<h2 id="s6">六、三个典型工作流实战</h2>
+<div class="card">
+<h3>场景 A：研究一只股票（5 分钟）</h3>
+<div class="flow"><span class="n">实时行情查 600519</span><span class="a">→</span><span class="n">看K线/F10</span><span class="a">→</span><span class="n">策略库选双均线</span><span class="a">→</span><span class="n">回测中心跑回测</span><span class="a">→</span><span class="n">稳健性检验</span><span class="a">→</span><span class="n">看是否过拟合</span></div>
+<h3>场景 B：从全市场选股到组合（约 2–3 分钟）</h3>
+<div class="flow"><span class="n">选股页选「价值选股」</span><span class="a">→</span><span class="n">设PE≤20/PB≤3</span><span class="a">→</span><span class="n">执行选股</span><span class="a">→</span><span class="n">看因子明细</span><span class="a">→</span><span class="n">送入一条龙</span><span class="a">→</span><span class="n">组合回测+风控+合规</span></div>
+<h3>场景 C：优化策略参数（数分钟，取决于组合上限）</h3>
+<div class="flow"><span class="n">策略库选双均线</span><span class="a">→</span><span class="n">回测中心参数寻优</span><span class="a">→</span><span class="n">按折外稳健分排序</span><span class="a">→</span><span class="n">一键回写参数</span><span class="a">→</span><span class="n">再跑回测验证</span></div>
+<div class="note"><b>建议顺序：</b>先看图（行情页）建立直观感觉 → 再回测验证策略（回测中心）→ 再选股落地（选股页）→ 最后一条龙端到端检查（工作流）。参数优化放在最后，且永远用折外稳健分而非样本内最高收益做决策。</div>
+</div>
+
+<h2 id="s7">七、实测效果（真实数据）</h2>
+<div class="card">
+<p>以下数字均来自系统内真实回测脚本与报告，标注口径与时间，<b>仅说明系统当前能力，不构成任何收益承诺</b>。</p>
+<h3>7.1 回测：诚实的结果往往不好看</h3>
+<table>
+<tr><th>案例</th><th>真实结果</th><th>说明</th></tr>
+<tr><td>双均线 @ 贵州茅台（样本内）</td><td class="red">+83.66%，最大回撤 32.06%，稳健分仅 0.03</td><td>收益看似漂亮，但折外稳健分极低——典型过拟合反面教材</td></tr>
+<tr><td>Dual Thrust @ 沪深300ETF（2016–2026）</td><td class="green">−12.49%，胜率 34%，最大回撤 −43.4%</td><td>同期买入持有 +43.1%；6 个标的原始版全部跑输买入持有</td></tr>
+<tr><td>Dual Thrust 参数网格（36 组）</td><td>中位数 −3.4%，仅 15 组为正</td><td>最优 +49%（大N/宽阈值/K2≥K1），最差 −54.5%；参数决定成败</td></tr>
+<tr><td>Dual Thrust 成本敏感性</td><td>滑点 0→0.2%，11 年收益 +4.6%→−26.8%</td><td>成本能吞噬全部优势</td></tr>
+<tr><td>多品种均线交叉回测</td><td>ETF +10.64%，螺纹钢 +0.88%</td><td>真实合约数据 + 差异化成本模型</td></tr>
+</table>
+<div class="danger"><b>重要工程发现（已修复）：</b>本次研究中排查出回测引擎的前视偏差——旧逻辑用「第 i 日收盘信号 + 第 i 日开盘价成交」，等于偷看当天，把同一策略收益虚高到 <b>+3258%</b>。改为真正的 T+1（收盘信号 → 次日开盘成交）后回落到真实的 <b>−12.49%</b>。<b>因此：此前其它报告中引用的旧口径收益数字，都应按新引擎重跑后才采信。</b></div>
+<h3>7.2 选股：10 个角度选出完全不同的股票</h3>
+<table>
+<tr><th>策略</th><th>实测选出的特征</th></tr>
+<tr><td>价值选股（PE≤20/PB≤3）</td><td>华夏银行、贵阳银行等 PE 4–5、PB 0.3 左右的低估值银行股</td></tr>
+<tr><td>反转选股（超跌+ROE 过滤）</td><td>动量排名 0–33 的真实超跌股，参数切换后排序明显改变</td></tr>
+<tr><td>动量选股</td><td>冰山冷热、北纬科技等动量排名 90+ 的强势股</td></tr>
+<tr><td>质量选股 / 小盘 / 技术面</td><td>高 ROE 股 / 小市值股 / 均线多头排列股，符合各自理论预期</td></tr>
+</table>
+<h3>7.3 数据链路</h3>
+<p>全市场真实快照约 5579–5600 只（新浪备源约 35 秒）；K 线在东财不可用时自动降级腾讯/新浪，三源均真实；端到端验证（个股/ETF 的快照、日/周/5分 K 线、F10、估值）全部通过。选股耗时 30–90 秒是真实全市场取数，界面持续显示进度。</p>
+</div>
+
+<h2 id="s8">八、已知不足与能力边界</h2>
+<div class="card">
+<ol>
+<li><b>免费数据源非生产级 SLA</b>：东财等公开接口可能临时限流/断连（本次就出现过，已加三源降级 + 缓存兜底）。研究和小资金够用；机构级、高频、五档深度需商业数据源。</li>
+<li><b>不做 AI 荐股</b>：AI 只做数据查询、回测编排、复盘分析，所有数字来自真实工具，不预测涨跌、不承诺收益。</li>
+<li><b>港股实盘未接入</b>：预留了接口，需券商 OpenAPI 凭证；CTP 期货、期权实盘需柜台参数配置，当前执行层默认只返回 <code>VALIDATED_ONLY</code>。</li>
+<li><b>QMT 实盘未在本机验证通过</b>：<code>scripts/verify_qmt_paper.py</code> 默认 validate 自检；因本机无 xtquant/miniQMT/账户，结论诚实为未通过（见 <code>reports/qmt_paper_verify.json</code>）。真实报单需券商权限齐备并显式切换 live。</li>
+<li><b>回测结果不代表未来</b>：Dual Thrust 在 A 股日线实测为负、双均线稳健分极低——系统展示真实数据，不粉饰。任何策略都可能失效。</li>
+<li><b>期权单合约历史短</b>：受合约生命周期限制，长周期回测受限。</li>
+<li><b>部分因子为推导值</b>：新浪备源不提供财报同比，ROE 由真实 PB/PE 推导（约等于 ROE），结果页已明确标注，非财报披露值。</li>
+<li><b>全市场扫描较慢</b>：需历史数据的策略要拉真实 K 线，单次 30–90 秒属正常；可用「历史精算池」权衡速度与覆盖。</li>
+<li><b>实盘需人工复核</b>：策略守护退役、回撤熔断触发后需人工确认重启，不做无人值守全自动实盘。</li>
+<li><b>历史报告口径问题</b>：前视偏差修复前的旧报告收益数字（TSP 调研、波龙调研、多市场扩展方案中的收益）应以新引擎重跑后再采信。</li>
+</ol>
+</div>
+
+<h2 id="s9">九、注意事项与风险提示</h2>
+<div class="card">
+<ul>
+<li><b>默认不真实下单</b>：保持 <code>paper/validate</code> 模式；切 <code>live</code> 前务必完成券商权限开通、模拟账号充分验证、风控合规参数复核。实盘 QMT 通常需 10 万门槛 + C4 测评 + 6 个月经验 + Windows 常开登录独立交易模式。</li>
+<li><b>密钥只存本地</b>：API Key/账户ID/Webhook 保存在 <code>config/system.json</code>，界面脱敏显示；不要把该文件随项目分享。环境变量优先级高于界面配置，注意别被覆盖。</li>
+<li><b>数据失败会明示</b>：行情/选股失败会在界面显示错误或警告，不会用假数据填充；看到「加载失败」先检查网络与数据源状态，等待重试。</li>
+<li><b>参数决策看折外不看样本内</b>：永远用 K 段折外稳健分选参数，样本内最高收益往往是过拟合陷阱。</li>
+<li><b>回测≠实盘</b>：回测未考虑流动性冲击、部分成交、涨跌停排队等实盘摩擦，实盘结果通常更差。</li>
+<li><b>关闭窗口=停止服务</b>：正在运行的任务会中断；长任务请等完成再关窗口。</li>
+<li><b>合规留痕别关</b>：关闭审计留痕不符合合规要求，配置检查会提示。</li>
+</ul>
+</div>
+
+<h2 id="s10">十、常见问题排查 FAQ</h2>
+<div class="card">
+<table>
+<tr><th>现象</th><th>原因与处理</th></tr>
+<tr><td>双击 start.bat 闪退 / 没反应</td><td>端口已占用且服务健康时会提示 [OK] 并直接开浏览器；否则检查 Python 探测。命令行直接跑命中微软商店占位符是常见原因，改用 start.bat 或写全 Python 路径。</td></tr>
+<tr><td>浏览器打不开 127.0.0.1:8765</td><td>服务没起来或端口被别的程序占用。用 <code>curl http://127.0.0.1:8765/api/status</code> 验证；被占用则停掉占用程序或改端口。</td></tr>
+<tr><td>K 线 / F10 显示「加载失败」</td><td>数据源临时限流。系统已内置重试与三源降级，等几秒刷新；若持续失败看仪表盘数据源健康状态。</td></tr>
+<tr><td>ETF 的 F10 是空的</td><td>东财不提供 ETF 的公司概况，属真实数据边界，不是故障。K 线正常。</td></tr>
+<tr><td>选股进度条停住 / 很久没结果</td><td>首次拉全市场约 30–90 秒属正常；界面有状态文字与日志，5 分钟无响应会提示超时。历史类策略可调小「历史精算池」加速。</td></tr>
+<tr><td>切换选股策略后参数没变</td><td>参数区随策略动态渲染，只显示该策略阈值；通用项（选股数/最小成交额/历史精算池）对所有策略共用。确认已点选策略卡片。</td></tr>
+<tr><td>AI 助手没有自然语言能力</td><td>未配置云端 API，当前为本地降级。去「系统配置 → AI 接口」填 Key 并测试连接。</td></tr>
+<tr><td>回测收益和旧报告对不上</td><td>引擎已修复前视偏差，旧数字口径作废。以新引擎重跑结果为准。</td></tr>
+<tr><td>想改端口 / 主题 / 初始资金</td><td>都在「系统配置」里改，保存即热更新，无需重启。</td></tr>
+</table>
+</div>
+
+<h2 id="s11">附录 A：命令行脚本</h2>
+<div class="card">
+<pre># 数据层自检（验证三源、缓存、字段口径）
+python scripts/check_data.py
+
+# 全链路真实数据跑通（命令行版）
+python scripts/run_fullchain.py
+
+# QMT 报单验证：默认只做环境自检，不报单
+python scripts/verify_qmt_paper.py validate
+# 券商模拟账号验证（需环境齐备 + 显式确认，拒绝 live）
+python scripts/verify_qmt_paper.py paper --i-understand
+
+# Dual Thrust 真实数据研究与报告生成
+python scripts/research_dual_thrust.py
+python scripts/build_dt_report.py</pre>
+<p>已有报告位于 <code>reports/</code>：<code>TSP_调研分析报告.md</code>、<code>巧未来-波龙量化调研分析报告.md</code>、<code>系统用户体验走查与整改报告.md</code>、<code>多市场品种扩展方案.md</code>、<code>Dual_Thrust区间突破策略研究报告.{html,md}</code>、<code>qmt_paper_verify.json</code>、<code>dual_thrust_backtest.json</code>。</p>
+</div>
+
+<h2 id="s12">附录 B：数据源与降级链</h2>
+<div class="card">
+<table>
+<tr><th>数据</th><th>主源</th><th>备源 / 兜底</th><th>备注</th></tr>
+<tr><td>实时快照</td><td>东方财富</td><td>腾讯 → 新浪 → 过期缓存(标注 STALE)</td><td>估值字段核对过：总市值/流通市值/换手率等</td></tr>
+<tr><td>历史 K 线</td><td>东方财富</td><td>腾讯(日/周/月) → 新浪(全周期) → 过期缓存</td><td>三源均真实；前复权早期个股可能出现非正价格，回测会裁掉该段</td></tr>
+<tr><td>全市场快照</td><td>东方财富 clist</td><td>新浪全市场(约5579只) → 磁盘缓存</td><td>结果中明确标注数据源</td></tr>
+<tr><td>F10 / 估值</td><td>东方财富</td><td>腾讯估值 + 旧缓存兜底</td><td>ETF 无 F10 公司概况属真实边界</td></tr>
+</table>
+<p>底层 HTTP 有 2 次指数退避重试以自愈瞬时断连。原则不变：<b>所有降级源都是真实行情，全失败则明确抛错，绝不伪造。</b></p>
+</div>
+
+<h2 id="s13">附录 C：目录结构</h2>
+<div class="card">
+<pre>qiaoweilai-bowlong-quant/
+├── start.bat                一键启动（Windows）
+├── web/                     浏览器终端（纯标准库）
+│   ├── server.py            REST API + SSE 实时日志流
+│   ├── index.html           10 个功能页
+│   ├── app.js               交互 + Canvas 图表 + SSE 订阅
+│   └── config.js / style.css
+├── core/
+│   ├── data/                三源适配 + 降级缓存 + enrich 统一口径
+│   ├── research/            防未来引擎 + 指标 + 稳健性 + 守护 + 归因
+│   ├── strategy/            13 交易策略 + 10 选股策略 + 注册中心
+│   ├── risk/ / compliance/  风控网关 / 预交易检查 + 审计
+│   ├── execution/           统一 Broker + 多市场路由
+│   ├── multimarket/         期货/期权/ETF 品种规格 + 数据 + 成本 + 回测
+│   ├── ai/                  云端助手 + 7 大工具
+│   └── workflow/            全链路编排 + 选股一条龙
+├── scripts/                 自检 / 回测 / 全链路 / QMT 验证脚本
+├── config/system.json       配置（本地保存，含脱敏密钥）
+├── cache/                   行情缓存
+├── logs/                    审计日志（append-only）
+└── reports/                 研究报告与回测原始数据（含本说明书）</pre>
+</div>
+
+<div class="disclaimer" id="s14"><b>免责声明</b><br>
+本说明书及「巧未来-波龙量化」系统所呈现的一切内容，均基于公开数据与量化方法，<b>仅供研究与学习参考，不构成任何投资建议或收益承诺</b>。市场有风险，投资需谨慎。回测结果基于历史数据，不预示未来表现；任何策略都可能失效。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。实盘交易前请充分验证并理解相关风险。</div>
+
+<footer>巧未来-波龙量化 v1.6 · 安装使用说明书 · 编制于 2026-11-20 · 全部数据真实，回测禁止随机数</footer>
+</div>
+</body>
+</html>

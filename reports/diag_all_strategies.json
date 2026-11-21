@@ -1,0 +1,782 @@
+{
+ "dual_ma|510300.SH": {
+  "summary": {
+   "final_equity": 788835.95,
+   "total_return": -0.2112,
+   "annual_return": -0.0328,
+   "max_drawdown": -0.461,
+   "sharpe": -0.237,
+   "calmar": -0.071,
+   "trade_pairs": 57,
+   "win_rate": 0.3157894736842105,
+   "profit_factor": 1.7716727230985339,
+   "net_pnl": -211164.0526967353
+  },
+  "n_trades": 114
+ },
+ "dual_ma|000300.SH": {
+  "summary": {
+   "final_equity": 811139.26,
+   "total_return": -0.1889,
+   "annual_return": -0.029,
+   "max_drawdown": -0.37,
+   "sharpe": -0.359,
+   "calmar": -0.078,
+   "trade_pairs": 59,
+   "win_rate": 0.3050847457627119,
+   "profit_factor": 1.7870746396660786,
+   "net_pnl": -188860.7417696956
+  },
+  "n_trades": 118
+ },
+ "dual_ma|600519.SH": {
+  "summary": {
+   "final_equity": 1648423.88,
+   "total_return": 0.6484,
+   "annual_return": 0.0734,
+   "max_drawdown": -0.5413,
+   "sharpe": 0.341,
+   "calmar": 0.136,
+   "trade_pairs": 54,
+   "win_rate": 0.2777777777777778,
+   "profit_factor": 2.9995297685620774,
+   "net_pnl": 434374.53996460856
+  },
+  "n_trades": 109
+ },
+ "dual_ma|000858.SZ": {
+  "summary": {
+   "final_equity": 1460961.56,
+   "total_return": 0.461,
+   "annual_return": 0.0551,
+   "max_drawdown": -0.6603,
+   "sharpe": 0.285,
+   "calmar": 0.083,
+   "trade_pairs": 47,
+   "win_rate": 0.3404255319148936,
+   "profit_factor": 2.1255451374614194,
+   "net_pnl": 460961.5610348216
+  },
+  "n_trades": 94
+ },
+ "macd|510300.SH": {
+  "summary": {
+   "final_equity": 999159.1,
+   "total_return": -0.0008,
+   "annual_return": -0.0001,
+   "max_drawdown": -0.4448,
+   "sharpe": -0.048,
+   "calmar": -0.0,
+   "trade_pairs": 63,
+   "win_rate": 0.3333333333333333,
+   "profit_factor": 2.0417452829963723,
+   "net_pnl": 31281.852269058974
+  },
+  "n_trades": 127
+ },
+ "macd|000300.SH": {
+  "summary": {
+   "final_equity": 1054377.01,
+   "total_return": 0.0544,
+   "annual_return": 0.0075,
+   "max_drawdown": -0.3546,
+   "sharpe": -0.052,
+   "calmar": 0.021,
+   "trade_pairs": 63,
+   "win_rate": 0.3333333333333333,
+   "profit_factor": 2.1490273945586678,
+   "net_pnl": 77631.78127914682
+  },
+  "n_trades": 127
+ },
+ "macd|600519.SH": {
+  "summary": {
+   "final_equity": 1104898.63,
+   "total_return": 0.1049,
+   "annual_return": 0.0142,
+   "max_drawdown": -0.3632,
+   "sharpe": 0.061,
+   "calmar": 0.039,
+   "trade_pairs": 70,
+   "win_rate": 0.32857142857142857,
+   "profit_factor": 2.167597482155216,
+   "net_pnl": 104898.63231996268
+  },
+  "n_trades": 140
+ },
+ "macd|000858.SZ": {
+  "summary": {
+   "final_equity": 2197291.95,
+   "total_return": 1.1973,
+   "annual_return": 0.1178,
+   "max_drawdown": -0.4799,
+   "sharpe": 0.467,
+   "calmar": 0.245,
+   "trade_pairs": 64,
+   "win_rate": 0.40625,
+   "profit_factor": 1.8724377958989382,
+   "net_pnl": 1197291.9477222194
+  },
+  "n_trades": 128
+ },
+ "turtle|510300.SH": {
+  "summary": {
+   "final_equity": 1210859.26,
+   "total_return": 0.2109,
+   "annual_return": 0.0273,
+   "max_drawdown": -0.2647,
+   "sharpe": 0.119,
+   "calmar": 0.103,
+   "trade_pairs": 29,
+   "win_rate": 0.27586206896551724,
+   "profit_factor": 3.44029970939706,
+   "net_pnl": 210859.26350346368
+  },
+  "n_trades": 58
+ },
+ "turtle|000300.SH": {
+  "summary": {
+   "final_equity": 1064597.35,
+   "total_return": 0.0646,
+   "annual_return": 0.0088,
+   "max_drawdown": -0.2073,
+   "sharpe": -0.066,
+   "calmar": 0.043,
+   "trade_pairs": 29,
+   "win_rate": 0.27586206896551724,
+   "profit_factor": 2.997861368097693,
+   "net_pnl": 64597.35154554223
+  },
+  "n_trades": 58
+ },
+ "turtle|600519.SH": {
+  "summary": {
+   "final_equity": 2346097.76,
+   "total_return": 1.3461,
+   "annual_return": 0.1284,
+   "max_drawdown": -0.3937,
+   "sharpe": 0.592,
+   "calmar": 0.326,
+   "trade_pairs": 23,
+   "win_rate": 0.43478260869565216,
+   "profit_factor": 2.229454872170354,
+   "net_pnl": 1087307.1343240975
+  },
+  "n_trades": 47
+ },
+ "turtle|000858.SZ": {
+  "summary": {
+   "final_equity": 1803687.59,
+   "total_return": 0.8037,
+   "annual_return": 0.087,
+   "max_drawdown": -0.5495,
+   "sharpe": 0.365,
+   "calmar": 0.158,
+   "trade_pairs": 25,
+   "win_rate": 0.4,
+   "profit_factor": 1.8441761182808913,
+   "net_pnl": 791903.8357421455
+  },
+  "n_trades": 51
+ },
+ "bollinger|510300.SH": {
+  "summary": {
+   "final_equity": 1315306.59,
+   "total_return": 0.3153,
+   "annual_return": 0.0393,
+   "max_drawdown": -0.1612,
+   "sharpe": 0.237,
+   "calmar": 0.244,
+   "trade_pairs": 31,
+   "win_rate": 0.7419354838709677,
+   "profit_factor": 0.9783767665918122,
+   "net_pnl": 540902.4163806818
+  },
+  "n_trades": 63
+ },
+ "bollinger|000300.SH": {
+  "summary": {
+   "final_equity": 1280435.44,
+   "total_return": 0.2804,
+   "annual_return": 0.0354,
+   "max_drawdown": -0.0897,
+   "sharpe": 0.245,
+   "calmar": 0.395,
+   "trade_pairs": 31,
+   "win_rate": 0.6774193548387096,
+   "profit_factor": 1.4667659757855245,
+   "net_pnl": 385411.0769249434
+  },
+  "n_trades": 63
+ },
+ "bollinger|600519.SH": {
+  "summary": {
+   "final_equity": 1547956.12,
+   "total_return": 0.548,
+   "annual_return": 0.0639,
+   "max_drawdown": -0.2823,
+   "sharpe": 0.381,
+   "calmar": 0.226,
+   "trade_pairs": 26,
+   "win_rate": 0.8461538461538461,
+   "profit_factor": 0.4592923853993886,
+   "net_pnl": 547956.1188288027
+  },
+  "n_trades": 52
+ },
+ "bollinger|000858.SZ": {
+  "summary": {
+   "final_equity": 1722149.03,
+   "total_return": 0.7221,
+   "annual_return": 0.0799,
+   "max_drawdown": -0.3549,
+   "sharpe": 0.391,
+   "calmar": 0.225,
+   "trade_pairs": 28,
+   "win_rate": 0.7142857142857143,
+   "profit_factor": 0.5878501167314755,
+   "net_pnl": 722149.0314455391
+  },
+  "n_trades": 56
+ },
+ "rsi|510300.SH": {
+  "summary": {
+   "final_equity": 1419902.46,
+   "total_return": 0.4199,
+   "annual_return": 0.0506,
+   "max_drawdown": -0.2212,
+   "sharpe": 0.331,
+   "calmar": 0.229,
+   "trade_pairs": 6,
+   "win_rate": 0.8333333333333334,
+   "profit_factor": 7.817433811936614,
+   "net_pnl": 549046.7748322928
+  },
+  "n_trades": 13
+ },
+ "rsi|000300.SH": {
+  "summary": {
+   "final_equity": 1155372.09,
+   "total_return": 0.1554,
+   "annual_return": 0.0205,
+   "max_drawdown": -0.1804,
+   "sharpe": 0.041,
+   "calmar": 0.114,
+   "trade_pairs": 5,
+   "win_rate": 0.6,
+   "profit_factor": 4.469446454747666,
+   "net_pnl": 224991.2199823207
+  },
+  "n_trades": 11
+ },
+ "rsi|600519.SH": {
+  "summary": {
+   "final_equity": 1693716.21,
+   "total_return": 0.6937,
+   "annual_return": 0.0775,
+   "max_drawdown": -0.3365,
+   "sharpe": 0.439,
+   "calmar": 0.23,
+   "trade_pairs": 7,
+   "win_rate": 0.8571428571428571,
+   "profit_factor": 3.7562199541166064,
+   "net_pnl": 693716.2141678567
+  },
+  "n_trades": 14
+ },
+ "rsi|000858.SZ": {
+  "summary": {
+   "final_equity": 932112.78,
+   "total_return": -0.0679,
+   "annual_return": -0.0099,
+   "max_drawdown": -0.5097,
+   "sharpe": -0.036,
+   "calmar": -0.019,
+   "trade_pairs": 6,
+   "win_rate": 0.5,
+   "profit_factor": 0.8933745057270773,
+   "net_pnl": -67887.2175707875
+  },
+  "n_trades": 12
+ },
+ "kdj|510300.SH": {
+  "summary": {
+   "final_equity": 954497.94,
+   "total_return": -0.0455,
+   "annual_return": -0.0065,
+   "max_drawdown": -0.3563,
+   "sharpe": -0.105,
+   "calmar": -0.018,
+   "trade_pairs": 31,
+   "win_rate": 0.5483870967741935,
+   "profit_factor": 0.8067441679712263,
+   "net_pnl": -13456.207353795035
+  },
+  "n_trades": 63
+ },
+ "kdj|000300.SH": {
+  "summary": {
+   "final_equity": 833678.2,
+   "total_return": -0.1663,
+   "annual_return": -0.0253,
+   "max_drawdown": -0.3475,
+   "sharpe": -0.311,
+   "calmar": -0.073,
+   "trade_pairs": 32,
+   "win_rate": 0.46875,
+   "profit_factor": 0.8428029689149634,
+   "net_pnl": -145461.7902592781
+  },
+  "n_trades": 65
+ },
+ "kdj|600519.SH": {
+  "summary": {
+   "final_equity": 2293677.67,
+   "total_return": 1.2937,
+   "annual_return": 0.1248,
+   "max_drawdown": -0.3613,
+   "sharpe": 0.575,
+   "calmar": 0.345,
+   "trade_pairs": 30,
+   "win_rate": 0.6333333333333333,
+   "profit_factor": 1.1534985651523042,
+   "net_pnl": 1293677.6685727017
+  },
+  "n_trades": 60
+ },
+ "kdj|000858.SZ": {
+  "summary": {
+   "final_equity": 1306603.57,
+   "total_return": 0.3066,
+   "annual_return": 0.0386,
+   "max_drawdown": -0.7301,
+   "sharpe": 0.229,
+   "calmar": 0.053,
+   "trade_pairs": 26,
+   "win_rate": 0.5384615384615384,
+   "profit_factor": 0.918720791624104,
+   "net_pnl": 306603.5715588841
+  },
+  "n_trades": 52
+ },
+ "momentum|510300.SH": {
+  "summary": {
+   "final_equity": 1141861.31,
+   "total_return": 0.1419,
+   "annual_return": 0.0188,
+   "max_drawdown": -0.2853,
+   "sharpe": 0.06,
+   "calmar": 0.066,
+   "trade_pairs": 38,
+   "win_rate": 0.39473684210526316,
+   "profit_factor": 1.8221934621851736,
+   "net_pnl": 141861.31039575412
+  },
+  "n_trades": 76
+ },
+ "momentum|000300.SH": {
+  "summary": {
+   "final_equity": 1039247.47,
+   "total_return": 0.0392,
+   "annual_return": 0.0054,
+   "max_drawdown": -0.2255,
+   "sharpe": -0.1,
+   "calmar": 0.024,
+   "trade_pairs": 34,
+   "win_rate": 0.35294117647058826,
+   "profit_factor": 1.9709614204550363,
+   "net_pnl": 39247.47256320342
+  },
+  "n_trades": 68
+ },
+ "momentum|600519.SH": {
+  "summary": {
+   "final_equity": 2691280.96,
+   "total_return": 1.6913,
+   "annual_return": 0.1506,
+   "max_drawdown": -0.4265,
+   "sharpe": 0.662,
+   "calmar": 0.353,
+   "trade_pairs": 45,
+   "win_rate": 0.4,
+   "profit_factor": 2.327309639363458,
+   "net_pnl": 1416589.3367459578
+  },
+  "n_trades": 91
+ },
+ "momentum|000858.SZ": {
+  "summary": {
+   "final_equity": 3327057.22,
+   "total_return": 2.3271,
+   "annual_return": 0.1853,
+   "max_drawdown": -0.3772,
+   "sharpe": 0.652,
+   "calmar": 0.491,
+   "trade_pairs": 42,
+   "win_rate": 0.40476190476190477,
+   "profit_factor": 2.150426605164228,
+   "net_pnl": 2335389.984832819
+  },
+  "n_trades": 85
+ },
+ "dual_momentum|510300.SH": {
+  "summary": {
+   "final_equity": 683003.83,
+   "total_return": -0.317,
+   "annual_return": -0.0522,
+   "max_drawdown": -0.3201,
+   "sharpe": -1.003,
+   "calmar": -0.163,
+   "trade_pairs": 17,
+   "win_rate": 0.17647058823529413,
+   "profit_factor": 0.5313405233938349,
+   "net_pnl": -316996.1689011467
+  },
+  "n_trades": 34
+ },
+ "dual_momentum|000300.SH": {
+  "summary": {
+   "final_equity": 764986.35,
+   "total_return": -0.235,
+   "annual_return": -0.037,
+   "max_drawdown": -0.2748,
+   "sharpe": -1.014,
+   "calmar": -0.135,
+   "trade_pairs": 16,
+   "win_rate": 0.1875,
+   "profit_factor": 0.406337272119382,
+   "net_pnl": -235013.65290017906
+  },
+  "n_trades": 32
+ },
+ "dual_momentum|600519.SH": {
+  "summary": {
+   "final_equity": 1198556.48,
+   "total_return": 0.1986,
+   "annual_return": 0.026,
+   "max_drawdown": -0.4098,
+   "sharpe": 0.107,
+   "calmar": 0.063,
+   "trade_pairs": 20,
+   "win_rate": 0.3,
+   "profit_factor": 2.662011646206493,
+   "net_pnl": 92022.43983768225
+  },
+  "n_trades": 41
+ },
+ "dual_momentum|000858.SZ": {
+  "summary": {
+   "final_equity": 2026919.86,
+   "total_return": 1.0269,
+   "annual_return": 0.1051,
+   "max_drawdown": -0.4375,
+   "sharpe": 0.512,
+   "calmar": 0.24,
+   "trade_pairs": 13,
+   "win_rate": 0.38461538461538464,
+   "profit_factor": 3.5987427262283553,
+   "net_pnl": 1013688.1045189834
+  },
+  "n_trades": 27
+ },
+ "multi_factor|510300.SH": {
+  "summary": {
+   "final_equity": 1000000.0,
+   "total_return": 0.0,
+   "annual_return": 0.0,
+   "max_drawdown": 0.0,
+   "sharpe": 0.0,
+   "calmar": 0.0,
+   "trade_pairs": 0,
+   "win_rate": 0.0,
+   "profit_factor": 0.0,
+   "net_pnl": 0
+  },
+  "n_trades": 0
+ },
+ "multi_factor|000300.SH": {
+  "summary": {
+   "final_equity": 1000000.0,
+   "total_return": 0.0,
+   "annual_return": 0.0,
+   "max_drawdown": 0.0,
+   "sharpe": 0.0,
+   "calmar": 0.0,
+   "trade_pairs": 0,
+   "win_rate": 0.0,
+   "profit_factor": 0.0,
+   "net_pnl": 0
+  },
+  "n_trades": 0
+ },
+ "multi_factor|600519.SH": {
+  "summary": {
+   "final_equity": 1000000.0,
+   "total_return": 0.0,
+   "annual_return": 0.0,
+   "max_drawdown": 0.0,
+   "sharpe": 0.0,
+   "calmar": 0.0,
+   "trade_pairs": 0,
+   "win_rate": 0.0,
+   "profit_factor": 0.0,
+   "net_pnl": 0
+  },
+  "n_trades": 0
+ },
+ "multi_factor|000858.SZ": {
+  "summary": {
+   "final_equity": 1000000.0,
+   "total_return": 0.0,
+   "annual_return": 0.0,
+   "max_drawdown": 0.0,
+   "sharpe": 0.0,
+   "calmar": 0.0,
+   "trade_pairs": 0,
+   "win_rate": 0.0,
+   "profit_factor": 0.0,
+   "net_pnl": 0
+  },
+  "n_trades": 0
+ },
+ "pairs|510300.SH": {
+  "summary": {
+   "final_equity": 1000000.0,
+   "total_return": 0.0,
+   "annual_return": 0.0,
+   "max_drawdown": 0.0,
+   "sharpe": 0.0,
+   "calmar": 0.0,
+   "trade_pairs": 0,
+   "win_rate": 0.0,
+   "profit_factor": 0.0,
+   "net_pnl": 0
+  },
+  "n_trades": 0
+ },
+ "pairs|000300.SH": {
+  "summary": {
+   "final_equity": 1000000.0,
+   "total_return": 0.0,
+   "annual_return": 0.0,
+   "max_drawdown": 0.0,
+   "sharpe": 0.0,
+   "calmar": 0.0,
+   "trade_pairs": 0,
+   "win_rate": 0.0,
+   "profit_factor": 0.0,
+   "net_pnl": 0
+  },
+  "n_trades": 0
+ },
+ "pairs|600519.SH": {
+  "summary": {
+   "final_equity": 1000000.0,
+   "total_return": 0.0,
+   "annual_return": 0.0,
+   "max_drawdown": 0.0,
+   "sharpe": 0.0,
+   "calmar": 0.0,
+   "trade_pairs": 0,
+   "win_rate": 0.0,
+   "profit_factor": 0.0,
+   "net_pnl": 0
+  },
+  "n_trades": 0
+ },
+ "pairs|000858.SZ": {
+  "summary": {
+   "final_equity": 1000000.0,
+   "total_return": 0.0,
+   "annual_return": 0.0,
+   "max_drawdown": 0.0,
+   "sharpe": 0.0,
+   "calmar": 0.0,
+   "trade_pairs": 0,
+   "win_rate": 0.0,
+   "profit_factor": 0.0,
+   "net_pnl": 0
+  },
+  "n_trades": 0
+ },
+ "grid|510300.SH": {
+  "summary": {
+   "final_equity": 733325.77,
+   "total_return": -0.2667,
+   "annual_return": -0.0427,
+   "max_drawdown": -0.4133,
+   "sharpe": -0.404,
+   "calmar": -0.103,
+   "trade_pairs": 182,
+   "win_rate": 0.5824175824175825,
+   "profit_factor": 0.611794678600423,
+   "net_pnl": -244652.8820802488
+  },
+  "n_trades": 365
+ },
+ "grid|000300.SH": {
+  "summary": {
+   "final_equity": 682026.68,
+   "total_return": -0.318,
+   "annual_return": -0.0524,
+   "max_drawdown": -0.41,
+   "sharpe": -0.719,
+   "calmar": -0.128,
+   "trade_pairs": 162,
+   "win_rate": 0.5864197530864198,
+   "profit_factor": 0.4983232491616998,
+   "net_pnl": -306289.8581549315
+  },
+  "n_trades": 325
+ },
+ "grid|600519.SH": {
+  "summary": {
+   "final_equity": 666442.01,
+   "total_return": -0.3336,
+   "annual_return": -0.0559,
+   "max_drawdown": -0.5712,
+   "sharpe": -0.314,
+   "calmar": -0.098,
+   "trade_pairs": 211,
+   "win_rate": 0.5781990521327014,
+   "profit_factor": 0.6444465716193493,
+   "net_pnl": -333557.99229117134
+  },
+  "n_trades": 422
+ },
+ "grid|000858.SZ": {
+  "summary": {
+   "final_equity": 356036.33,
+   "total_return": -0.644,
+   "annual_return": -0.1359,
+   "max_drawdown": -0.8152,
+   "sharpe": -0.383,
+   "calmar": -0.167,
+   "trade_pairs": 254,
+   "win_rate": 0.5787401574803149,
+   "profit_factor": 0.6162947705526195,
+   "net_pnl": -645707.8096070333
+  },
+  "n_trades": 509
+ },
+ "dual_thrust|510300.SH": {
+  "summary": {
+   "final_equity": 1213579.16,
+   "total_return": 0.2136,
+   "annual_return": 0.0276,
+   "max_drawdown": -0.3072,
+   "sharpe": 0.129,
+   "calmar": 0.09,
+   "trade_pairs": 56,
+   "win_rate": 0.3392857142857143,
+   "profit_factor": 2.310482543821105,
+   "net_pnl": 213579.1555607218
+  },
+  "n_trades": 112
+ },
+ "dual_thrust|000300.SH": {
+  "summary": {
+   "final_equity": 871666.27,
+   "total_return": -0.1283,
+   "annual_return": -0.0191,
+   "max_drawdown": -0.3274,
+   "sharpe": -0.242,
+   "calmar": -0.058,
+   "trade_pairs": 62,
+   "win_rate": 0.3225806451612903,
+   "profit_factor": 1.829472512634814,
+   "net_pnl": -128333.73129191501
+  },
+  "n_trades": 124
+ },
+ "dual_thrust|600519.SH": {
+  "summary": {
+   "final_equity": 2200299.68,
+   "total_return": 1.2003,
+   "annual_return": 0.1182,
+   "max_drawdown": -0.3693,
+   "sharpe": 0.501,
+   "calmar": 0.32,
+   "trade_pairs": 52,
+   "win_rate": 0.4423076923076923,
+   "profit_factor": 1.8521506963405339,
+   "net_pnl": 1200299.683934747
+  },
+  "n_trades": 104
+ },
+ "dual_thrust|000858.SZ": {
+  "summary": {
+   "final_equity": 3312918.76,
+   "total_return": 2.3129,
+   "annual_return": 0.1846,
+   "max_drawdown": -0.5307,
+   "sharpe": 0.609,
+   "calmar": 0.348,
+   "trade_pairs": 46,
+   "win_rate": 0.391304347826087,
+   "profit_factor": 2.168749892214069,
+   "net_pnl": 2312918.7612058665
+  },
+  "n_trades": 92
+ },
+ "atr_channel|510300.SH": {
+  "summary": {
+   "final_equity": 1146240.81,
+   "total_return": 0.1462,
+   "annual_return": 0.0194,
+   "max_drawdown": -0.2197,
+   "sharpe": 0.055,
+   "calmar": 0.088,
+   "trade_pairs": 35,
+   "win_rate": 0.34285714285714286,
+   "profit_factor": 2.3216166431585497,
+   "net_pnl": 146240.81001387487
+  },
+  "n_trades": 70
+ },
+ "atr_channel|000300.SH": {
+  "summary": {
+   "final_equity": 1034865.29,
+   "total_return": 0.0349,
+   "annual_return": 0.0048,
+   "max_drawdown": -0.1717,
+   "sharpe": -0.141,
+   "calmar": 0.028,
+   "trade_pairs": 35,
+   "win_rate": 0.4,
+   "profit_factor": 1.6124034181828248,
+   "net_pnl": 34865.28813834306
+  },
+  "n_trades": 70
+ },
+ "atr_channel|600519.SH": {
+  "summary": {
+   "final_equity": 1836370.64,
+   "total_return": 0.8364,
+   "annual_return": 0.0899,
+   "max_drawdown": -0.3431,
+   "sharpe": 0.445,
+   "calmar": 0.262,
+   "trade_pairs": 32,
+   "win_rate": 0.4375,
+   "profit_factor": 1.972601714777438,
+   "net_pnl": 646590.8542537679
+  },
+  "n_trades": 65
+ },
+ "atr_channel|000858.SZ": {
+  "summary": {
+   "final_equity": 1661592.64,
+   "total_return": 0.6616,
+   "annual_return": 0.0745,
+   "max_drawdown": -0.5874,
+   "sharpe": 0.33,
+   "calmar": 0.127,
+   "trade_pairs": 32,
+   "win_rate": 0.34375,
+   "profit_factor": 2.285566184840642,
+   "net_pnl": 661592.6371428745
+  },
+  "n_trades": 64
+ }
+}

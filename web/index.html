@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>巧未来-波龙量化</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>巧未来-波龙量化</h1>
+      <div class="sub">QUANT TRADING SYSTEM v1.5</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-item active" data-page="dashboard"><span class="ico">◫</span>总览仪表盘</div>
+      <div class="nav-item" data-page="market"><span class="ico">📈</span>实时行情</div>
+      <div class="nav-item" data-page="multimarket"><span class="ico">🌐</span>多市场品种 <span class="badge" style="font-size:9px;margin-left:auto">NEW</span></div>
+      <div class="nav-item" data-page="strategy"><span class="ico">⚙</span>策略库</div>
+      <div class="nav-item" data-page="selector"><span class="ico">🎯</span>全市场选股</div>
+      <div class="nav-item" data-page="rotation"><span class="ico">🚀</span>有效策略·ETF轮动 <span class="badge" style="font-size:9px;margin-left:auto">实测</span></div>
+      <div class="nav-item" data-page="backtest"><span class="ico">🧪</span>回测中心</div>
+      <div class="nav-item" data-page="pipeline"><span class="ico">🔗</span>全链路工作流</div>
+      <div class="nav-item" data-page="compliance"><span class="ico">🛡</span>风控与合规</div>
+      <div class="nav-item" data-page="ai"><span class="ico">🤖</span>AI 助手</div>
+      <div class="nav-item" data-page="config"><span class="ico">⚙</span>系统配置 <span class="badge" style="font-size:9px;margin-left:auto" id="config-badge">待配置</span></div>
+    </nav>
+    <div class="sidebar-foot">
+      <div><span class="dot"></span>数据层 <span id="side-src">三源在线</span></div>
+      <div style="margin-top:6px"><span class="dot"></span>执行层 <span id="side-mode">校验模式</span></div>
+      <div style="margin-top:6px"><span class="dot" id="ai-dot"></span>AI <span id="side-ai">本地降级</span></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="title" id="page-title">总览仪表盘</div>
+      <div class="status">
+        <span class="badge blue" id="clock">--:--:--</span>
+        <span class="badge">引擎 <b id="contract">-</b></span>
+        <span class="badge green" id="mode-badge">VALIDATE · 不产生真实委托</span>
+        <span class="badge blue" style="cursor:pointer" onclick="goPage('config')" title="系统配置">⚙ 配置</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- 仪表盘 -->
+      <div class="page active" id="page-dashboard">
+        <div class="hint" id="sys-hint">本系统全部数据来自真实公开行情源，回测禁止使用随机数；实盘执行默认校验模式，不产生真实委托。所有运行过程与结果在下方同步观测。</div>
+        <div class="grid g4" style="margin-bottom:14px">
+          <div class="card"><h3>主力数据源</h3><div class="metric small">东方财富</div><div class="subtext">腾讯/新浪 备份 · 全市场 5900+ 标的</div></div>
+          <div class="card"><h3>可选策略</h3><div class="metric small" id="m-strategies">-</div><div class="subtext">覆盖 7 大类 · 全部可回测可实盘</div></div>
+          <div class="card"><h3>数据契约口径</h3><div class="metric small" style="font-size:15px" id="m-contract">-</div><div class="subtext">基础数据少存 · 指标现算 · 防口径漂移</div></div>
+          <div class="card"><h3>AI 云端接口</h3><div class="metric small" id="m-ai">未配置</div><div class="subtext" id="m-ai-model">本地工具直答降级可用</div></div>
+        </div>
+
+        <!-- 数据源健康监控 -->
+        <div class="card" style="margin-bottom:14px">
+          <div class="section-title">数据源健康监控 <span class="badge blue" style="font-size:10px">实时探测</span>
+            <button class="btn ghost" style="margin-left:auto;padding:4px 10px;font-size:11px" onclick="loadHealth()">重新检测</button>
+          </div>
+          <div id="health-panel" class="grid g3"><div class="subtext">检测中…</div></div>
+        </div>
+
+        <!-- 结果回报窗口 -->
+        <div class="card" style="margin-bottom:14px">
+          <div class="section-title">结果回报中心 <span class="badge blue" style="font-size:10px">最近一次运行</span>
+            <button class="btn ghost" style="margin-left:auto;padding:4px 10px;font-size:11px" onclick="refreshLastResult()">刷新结果</button>
+          </div>
+          <div id="result-report">
+            <div class="subtext" style="text-align:center;padding:20px">尚无运行结果。前往「回测中心」「全市场选股」或「全链路工作流」运行后，结果将自动汇总显示在这里。</div>
+          </div>
+        </div>
+
+        <div class="grid g2">
+          <div class="card">
+            <div class="section-title">系统能力矩阵</div>
+            <div class="kv"><span class="k">研究层</span><span>enrich统一口径 · 防未来函数 · K段折外 · 策略守护 · 因子归因</span></div>
+            <div class="kv"><span class="k">执行层</span><span>A股QMT · 期货CTP · 港股预留 · 统一路由 · 严格live边界</span></div>
+            <div class="kv"><span class="k">合规层</span><span>预交易检查 · 限额 · 禁投池 · 审计留痕 · 熔断</span></div>
+            <div class="kv"><span class="k">策略库</span><span>13个经典策略 · 全市场选股器 · 参数可调 · 稳健性筛选</span></div>
+            <div class="kv"><span class="k">AI助手</span><span>OpenAI兼容云端API · 工具调用 · 自动降级</span></div>
+          </div>
+          <div class="card">
+            <div class="section-title">实时运行窗口 <span class="badge green" style="font-size:10px">LIVE STREAM</span></div>
+            <div class="progressbar"><div id="dash-progress"></div></div>
+            <div class="logbox" id="dash-log" style="height:210px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 实时行情 -->
+      <div class="page" id="page-market">
+        <div class="card" style="margin-bottom:14px">
+          <div class="row">
+            <div class="field" style="width:150px"><label>股票代码</label><input id="mkt-code" value="600519" placeholder="如 600519"></div>
+            <button class="btn" onclick="fetchQuote()">查询行情</button>
+            <button class="btn ghost" onclick="fetchQuote('000858')">五粮液</button>
+            <button class="btn ghost" onclick="fetchQuote('601318')">中国平安</button>
+            <button class="btn ghost" onclick="fetchQuote('300750')">宁德时代</button>
+          </div>
+        </div>
+        <div class="grid g4" id="quote-cards" style="margin-bottom:14px"></div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="section-title" style="justify-content:flex-start;gap:14px;flex-wrap:wrap">
+            真实K线
+            <div class="period-tabs" id="period-tabs">
+              <button class="period-btn active" data-period="1d" onclick="switchPeriod('1d')">日K</button>
+              <button class="period-btn" data-period="1w" onclick="switchPeriod('1w')">周K</button>
+              <button class="period-btn" data-period="1M" onclick="switchPeriod('1M')">月K</button>
+              <button class="period-btn" data-period="60m" onclick="switchPeriod('60m')">60分</button>
+              <button class="period-btn" data-period="30m" onclick="switchPeriod('30m')">30分</button>
+              <button class="period-btn" data-period="5m" onclick="switchPeriod('5m')">5分</button>
+            </div>
+            <span class="subtext" id="kline-info" style="margin-left:auto"></span>
+          </div>
+          <div class="row" style="margin:8px 0 10px;gap:10px;flex-wrap:wrap;align-items:center">
+            <span class="subtext">均线：</span>
+            <div class="field" style="width:78px"><label>MA1</label><input id="ma-1" type="number" value="5" min="2" max="120" oninput="onMaParamChange()"></div>
+            <div class="field" style="width:78px"><label>MA2</label><input id="ma-2" type="number" value="10" min="2" max="120" oninput="onMaParamChange()"></div>
+            <div class="field" style="width:78px"><label>MA3</label><input id="ma-3" type="number" value="20" min="2" max="120" oninput="onMaParamChange()"></div>
+            <span class="subtext" style="color:#f0a020">MA1</span><span class="subtext" style="color:#a78bfa">MA2</span><span class="subtext" style="color:#4dd0e1">MA3</span>
+            <span class="subtext" style="margin-left:auto">← → 左右平移 · ↑ ↓ 缩放（光标不在输入框时生效）</span>
+            <button class="btn ghost" style="padding:4px 10px;font-size:11px" onclick="resetKlineView()">复位视图</button>
+          </div>
+          <div class="chart-wrap" style="height:380px"><canvas id="kline-chart"></canvas></div>
+        </div>
+        <!-- F10 基本信息窗口 -->
+        <div class="card">
+          <div class="section-title">F10 基本信息 <span class="badge blue" style="font-size:10px">真实数据 · 东财F10</span></div>
+          <div id="f10-content"><div class="subtext" style="padding:10px">查询行情后自动加载 F10 公司概况与估值信息。</div></div>
+        </div>
+      </div>
+
+      <!-- 多市场品种 -->
+      <div class="page" id="page-multimarket">
+        <div class="hint">期货 / 期权 / ETF 全部接入真实数据（东方财富公开接口实测）。成本按真实规则：<b>期货</b>=保证金×乘数+按手手续费、T+0 双向；<b>期权</b>=权利金×乘数、按张手续费、T+0 双向；<b>ETF</b>=份额×价格、免印花税、T+1。实盘执行默认校验模式，不产生真实委托。</div>
+        <div class="row" style="margin-bottom:12px">
+          <div class="field"><label>品种类别</label>
+            <select id="mm-kind" onchange="mmLoadInstruments()">
+              <option value="futures">期货主连（上期所/大商所/郑商所/中金所）</option>
+              <option value="etf">ETF 场内基金</option>
+              <option value="option">ETF 期权（上交所）</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1"><label>合约（点击选择）</label>
+            <div id="mm-inst-list" class="subtext">加载中…</div>
+          </div>
+        </div>
+        <div class="grid g2">
+          <div class="card">
+            <div class="section-title">实时快照 <span class="badge blue" style="font-size:10px">真实数据</span></div>
+            <div id="mm-quote" class="subtext">选择合约后自动加载。</div>
+          </div>
+          <div class="card">
+            <div class="section-title">成本测算</div>
+            <div class="row">
+              <div class="field" style="width:110px"><label>价格</label><input id="mm-cost-price" type="number" step="0.0001"></div>
+              <div class="field" style="width:110px"><label>数量(手/张/股)</label><input id="mm-cost-volume" type="number" value="1"></div>
+              <button class="btn" onclick="mmCalcCost()">测算</button>
+            </div>
+            <div id="mm-cost-result" class="subtext" style="margin-top:10px">—</div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <div class="section-title">真实K线 + 多品种回测</div>
+          <div class="row">
+            <div class="field" style="width:90px"><label>快线</label><input id="mm-fast" type="number" value="5"></div>
+            <div class="field" style="width:90px"><label>慢线</label><input id="mm-slow" type="number" value="20"></div>
+            <button class="btn green" onclick="mmRunBacktest()">运行回测</button>
+            <span class="subtext" id="mm-bt-info" style="margin-left:auto">均线交叉策略 · 真实K线 · 防未来函数</span>
+          </div>
+          <div class="chart-wrap" style="height:300px;margin-top:10px"><canvas id="mm-chart"></canvas></div>
+          <div id="mm-bt-result" class="subtext" style="margin-top:8px">—</div>
+        </div>
+      </div>
+
+      <!-- 策略库 -->
+      <div class="page" id="page-strategy">
+        <div class="hint"><b>本页是「交易择时策略库」（13 个）</b>：决定"什么时候买/卖"，用在 ①回测中心单标的回测与稳健性 ②多策略对比 ③组合回测的择时信号 ④参数自动寻优 ⑤全链路工作流。点击卡片选中后，下方参数会自动带入这些功能。<br>
+        <b>注意与「全市场选股」页的 10 个选股策略不同</b>：那 10 个决定"买哪些股票"，只用于选股打分；两者通过「选股一条龙」衔接。策略均按公开经典原理自研实现，无 GPL 许可风险。</div>
+        <div class="grid g3" id="strategy-list"></div>
+        <div class="card" style="margin-top:14px">
+          <div class="section-title">参数调节 · 稳健性说明</div>
+          <div class="row" id="param-panel"></div>
+          <div class="subtext" style="margin-top:10px" id="param-usage">参数会自动带入「回测中心」与「全链路工作流」；多策略对比使用各策略默认参数以便公平比较。参数不在样本内取最优——采用 K 段折外稳健分（0.6×中位 + 0.4×最差段）抑制过拟合。</div>
+        </div>
+      </div>
+
+      <!-- 全市场选股 -->
+      <div class="page" id="page-selector">
+        <div class="hint"><b>操作方式（重要）</b>：下面 10 张卡片是<b>单选</b>——点卡片即切换当前选股策略；每张卡片右下角的「用此策略选股」可直接运行，也可以使用下方统一按钮（按钮文字会随选中策略变化）。<br>
+        这 10 个策略回答"买哪些股票"，与「策略库」13 个交易择时策略（回答"何时买卖"）是两套体系，通过「全链路 → 选股一条龙」衔接。策略源自公开金融理论（Fama-French、格雷厄姆价值、动量/反转效应）与 qlib Alpha158/360、WorldQuant Alpha101 因子思想，按公式自研实现。</div>
+        <!-- 策略选择卡片 -->
+        <div class="card" style="margin-bottom:14px">
+          <div class="section-title">选股策略（10 个不同角度，可切换） <span class="badge blue" style="font-size:10px" id="sel-strategy-current">-</span></div>
+          <div class="grid g3" id="selector-strategy-list"></div>
+          <div id="selector-strategy-detail" class="hint" style="margin-top:12px;margin-bottom:0"></div>
+        </div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="section-title">策略专属参数 <span class="badge blue" style="font-size:10px" id="sel-param-tag">-</span></div>
+          <div class="subtext" style="margin-bottom:10px">参数随上方所选策略自动切换，只显示该策略真正使用的阈值。</div>
+          <div id="sel-strategy-params" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px"></div>
+          <div class="section-title" style="margin-top:14px;font-size:12px">通用设置</div>
+          <div class="row" style="flex-wrap:wrap;gap:10px">
+            <div class="field" style="width:100px"><label>选股数</label><input id="sel-topn" type="number" value="10" min="3" max="30"></div>
+            <div class="field" style="width:140px" id="sel-fetch-wrap"><label>历史精算池</label><input id="sel-fetchn" type="number" value="60" min="20" max="200"><div class="subtext" style="font-size:10px">仅历史类策略</div></div>
+            <div class="field" style="width:130px"><label>最小成交额(亿)</label><input id="sel-minamt" type="number" value="1" step="0.5"></div>
+            <button class="btn green" onclick="runSelector()" id="sel-btn" style="align-self:flex-end">▶ 执行全市场选股</button>
+          </div>
+          <div class="progressbar" style="margin-top:14px"><div id="sel-progress"></div></div>
+          <div class="subtext" id="sel-status" style="margin-top:6px">就绪 · 选择策略后点击执行</div>
+        </div>
+        <div class="grid g4" id="sel-summary" style="margin-bottom:14px"></div>
+        <div class="card">
+          <div class="section-title">选股结果（真实因子明细 · 可追溯）
+            <button class="btn ghost" style="margin-left:auto;padding:4px 10px;font-size:11px" onclick="sendSelectionToPipeline()" id="sel-to-pipe-btn" disabled>送入一条龙 →</button>
+          </div>
+          <div style="max-height:440px;overflow:auto"><table id="sel-table">
+            <thead><tr><th>排名</th><th>代码</th><th>名称</th><th>现价</th><th>综合分</th><th>策略因子明细</th><th>目标权重</th><th>选股理由</th></tr></thead>
+            <tbody></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <!-- 回测中心 -->
+      <div class="page" id="page-backtest">
+        <div class="card" style="margin-bottom:14px">
+          <div class="row">
+            <div class="field" style="width:150px"><label>代码</label><input id="bt-code" value="600519"></div>
+            <div class="field" style="width:200px"><label>策略</label><select id="bt-strategy"></select></div>
+            <button class="btn" onclick="runBacktest()">运行回测</button>
+            <button class="btn ghost" onclick="runRobustness()">稳健性检验</button>
+          </div>
+        </div>
+        <div class="grid g4" id="bt-metrics" style="margin-bottom:14px"></div>
+        <div class="grid g2">
+          <div class="card"><div class="section-title">净值曲线</div><div class="chart-wrap"><canvas id="equity-chart"></canvas></div></div>
+          <div class="card"><div class="section-title">交易流水（最近40笔）</div><div style="max-height:260px;overflow:auto"><table id="trades-table"><thead><tr><th>日期</th><th>方向</th><th>价格</th><th>数量</th><th>费用</th></tr></thead><tbody></tbody></table></div></div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div class="section-title">K段折外稳健性</div>
+          <div id="robust-result" class="subtext">尚未运行稳健性检验</div>
+        </div>
+        <!-- 多策略对比分析窗口 -->
+        <div class="card" style="margin-top:14px">
+          <div class="section-title">多策略对比分析 <span class="badge blue" style="font-size:10px">同一标的并列回测</span></div>
+          <div class="row" style="margin-bottom:12px">
+            <div class="field" style="width:150px"><label>对比标的</label><input id="cmp-code" value="600519"></div>
+            <button class="btn" onclick="runCompare()" id="cmp-btn">运行多策略对比</button>
+            <span class="subtext" style="align-self:center">默认对比前8个策略，按夏普比率排序</span>
+          </div>
+          <div id="compare-result"><div class="subtext">点击「运行多策略对比」查看并列绩效与净值曲线对比。</div></div>
+        </div>
+        <!-- 多标的组合回测 -->
+        <div class="card" style="margin-top:14px">
+          <div class="section-title">多标的组合回测 <span class="badge blue" style="font-size:10px">权重 · 再平衡 · 真实成本</span></div>
+          <div class="row" style="margin-bottom:12px;flex-wrap:wrap">
+            <div class="field" style="width:260px"><label>标的（逗号分隔）</label><input id="combo-codes" value="600519,000858,601318"></div>
+            <div class="field" style="width:180px"><label>策略</label><select id="combo-strategy"></select></div>
+            <div class="field" style="width:150px"><label>信号模式</label><select id="combo-mode">
+              <option value="strategy">策略择时</option><option value="weights">选股权重持有</option>
+            </select></div>
+            <div class="field" style="width:130px"><label>再平衡</label><select id="combo-rebalance">
+              <option value="monthly">按月</option><option value="weekly">按周</option>
+              <option value="daily">每日</option><option value="none">不调仓</option>
+            </select></div>
+            <button class="btn" onclick="runPortfolio()" id="combo-btn">运行组合回测</button>
+          </div>
+          <div id="combo-result"><div class="subtext">真实K线对齐后按权重构建组合，T+1 开盘执行，含佣金/印花税/滑点。</div></div>
+        </div>
+        <!-- 参数自动寻优 -->
+        <div class="card" style="margin-top:14px">
+          <div class="section-title">参数自动寻优 <span class="badge blue" style="font-size:10px">网格搜索 + K段折外稳健分</span></div>
+          <div class="row" style="margin-bottom:12px;flex-wrap:wrap">
+            <div class="field" style="width:140px"><label>标的</label><input id="opt-code" value="600519"></div>
+            <div class="field" style="width:180px"><label>策略</label><select id="opt-strategy"></select></div>
+            <div class="field" style="width:100px"><label>K段</label><input id="opt-k" type="number" value="5" min="2" max="10"></div>
+            <div class="field" style="width:120px"><label>组合上限</label><input id="opt-max" type="number" value="40" min="4" max="200"></div>
+            <div class="field" style="width:130px"><label>排序依据</label><select id="opt-objective">
+              <option value="robustness">折外稳健分</option><option value="sharpe">样本内夏普</option>
+              <option value="total_return">样本内收益</option>
+            </select></div>
+            <button class="btn" onclick="runOptimize()" id="opt-btn">开始寻优</button>
+          </div>
+          <div class="progressbar" style="margin-bottom:12px"><div id="opt-progress"></div></div>
+          <div id="opt-result"><div class="subtext">排序主依据为 0.6×各段收益中位 + 0.4×最差段，样本内绩效仅作参考。</div></div>
+        </div>
+      </div>
+
+      <!-- 全链路 -->
+      <div class="page" id="page-pipeline">
+        <div class="hint">一键跑通量化团队全程：数据→统一口径→策略→稳健检验→回测→策略守护→风控→合规→多市场执行路由→AI复盘。每步实时推送到下方运行窗口。</div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="row">
+            <div class="field" style="width:150px"><label>代码</label><input id="pl-code" value="600519"></div>
+            <div class="field" style="width:200px"><label>策略</label><select id="pl-strategy"></select></div>
+            <button class="btn green" onclick="runPipeline()">▶ 启动全链路</button>
+          </div>
+          <div class="progressbar" style="margin-top:14px"><div id="pl-progress"></div></div>
+        </div>
+        <div class="grid g2">
+          <div class="card">
+            <div class="section-title">实时运行窗口（同步观测）</div>
+            <div class="logbox" id="pl-log"></div>
+          </div>
+          <div class="card">
+            <div class="section-title">流水线步骤与结果</div>
+            <div id="pl-steps" class="subtext">等待启动…</div>
+          </div>
+        </div>
+        <!-- 选股一条龙 -->
+        <div class="card" style="margin-top:14px">
+          <div class="section-title">选股 → 组合回测 → 风控 → 合规 → 实盘意图
+            <span class="badge green" style="font-size:10px">一条龙 · 只生成意图不报单</span></div>
+          <div class="row" style="margin-bottom:12px;flex-wrap:wrap">
+            <div class="field" style="width:200px"><label>选股策略</label><select id="sp-strategy"></select></div>
+            <div class="field" style="width:110px"><label>入选数量</label><input id="sp-topn" type="number" value="10" min="2" max="30"></div>
+            <div class="field" style="width:140px"><label>组合再平衡</label><select id="sp-rebalance">
+              <option value="monthly">按月</option><option value="weekly">按周</option>
+              <option value="daily">每日</option><option value="none">不调仓</option>
+            </select></div>
+            <div class="field" style="width:140px"><label>动量拉取上限</label><input id="sp-fetchn" type="number" value="60" min="10" max="200"></div>
+            <button class="btn green" onclick="runSelectionPipeline()" id="sp-btn">▶ 启动选股一条龙</button>
+          </div>
+          <div class="progressbar" style="margin-bottom:12px"><div id="sp-progress"></div></div>
+          <div id="sp-result"><div class="subtext">选股结果直接驱动组合回测；风控与合规通过后生成 VALIDATED_ONLY 委托意图，绝不真实报单。</div></div>
+        </div>
+      </div>
+
+      <!-- 合规 -->
+      <div class="page" id="page-compliance">
+        <div class="grid g3" style="margin-bottom:14px">
+          <div class="card"><h3>执行模式</h3><div class="metric small" style="color:var(--down)" id="compliance-mode">读取中…</div><div class="subtext">VALIDATE 只校验不报单；LIVE 需在系统配置中显式开启</div></div>
+          <div class="card"><h3>合规规则</h3><div class="metric small">预交易闸</div><div class="subtext">禁投池 · 限额 · 时段 · 审计留痕</div></div>
+          <div class="card"><h3>策略守护</h3><div class="metric small" id="guard-count">-</div><div class="subtext">健康/观察/退役 三态监控</div></div>
+        </div>
+        <div class="card">
+          <div class="section-title">合规审计日志（append-only 留痕）</div>
+          <div style="max-height:420px;overflow:auto"><table id="audit-table"><thead><tr><th>时间</th><th>标的</th><th>方向</th><th>数量</th><th>金额</th><th>决策</th><th>原因</th></tr></thead><tbody></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- AI -->
+      <div class="page" id="page-ai">
+        <div class="card chatbox">
+          <div class="section-title">AI 助手 · 云端API + 工具调用 <span class="badge blue" style="font-size:10px" id="ai-source">本地降级</span></div>
+          <div class="hint">接入方式：前往「系统配置 → 🤖 AI 接口」填写 API Key / Base URL / Model 并点「测试连接」「保存并生效」；也可用环境变量 QIAO_AI__API_KEY 等覆盖（优先级更高）。支持 DeepSeek/通义/智谱/OpenAI 兼容接口。AI 可调用工具查询真实数据与回测；未配置时自动降级为本地工具直答。</div>
+          <div class="chat-msgs" id="chat-msgs">
+            <div class="msg ai">您好，我是巧未来-波龙量化 AI 助手。我可以帮您查询真实行情、运行回测、全市场选股、分析策略表现、查看风控与合规状态。请问需要什么？</div>
+          </div>
+          <div class="chat-input">
+            <input id="chat-input" placeholder="例如：用MACD策略回测600519，评价一下结果" onkeydown="if(event.key==='Enter')chat()">
+            <button class="btn" onclick="chat()" id="chat-btn">发送</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 有效策略：ETF动量轮动 -->
+      <div class="page" id="page-rotation">
+        <div class="hint"><b>这是经真实数据实测验证有效的策略</b>：宽基/大类资产 ETF 动量轮动。10 年总收益 <b>+327.7%</b>（年化 15.6%），最大回撤 <b>−25.7%</b>，夏普 0.59；同期买入持有沪深300ETF 仅 +49%、回撤 −44.8%。<br>
+        <b>核心逻辑</b>：每日算 22 日动量，满仓最强 ETF；全部转跌则空仓（熊市保命）；含黄金/纳指 ETF 实现跨资产分散。<b>注意</b>：样本外高收益含近年纳指/黄金大牛成分，长期预期应打折；结果仅供研究，不构成投资建议。</div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="section-title">运行参数 <span class="badge blue" style="font-size:10px">结果缓存1小时</span></div>
+          <div class="row">
+            <div class="field" style="width:140px"><label>动量回看N(日)</label><input id="rot-lookback" type="number" value="22" min="10" max="60"></div>
+            <div class="field" style="width:140px"><label>换仓钝化阈值</label><input id="rot-buffer" type="number" value="0" step="0.005" min="0" max="0.05"></div>
+            <button class="btn green" id="rot-btn" onclick="runRotation()">▶ 运行轮动回测</button>
+            <button class="btn ghost" onclick="runRotation(true)">↻ 强制刷新数据</button>
+          </div>
+          <div class="subtext" style="margin-top:8px">N=20~22 是实测稳定甜区（N=10 大亏、N=60 平庸）；钝化阈值 0~0.005 最佳。首次运行需联网拉取 6 只 ETF 的 10 年前复权数据，约 10-30 秒。</div>
+        </div>
+        <div id="rot-status" class="subtext" style="margin:8px 0"></div>
+        <div id="rot-kpis" class="grid g4" style="margin:12px 0"></div>
+        <div class="card">
+          <div class="section-title">净值曲线（真实数据 · T+1 · 双边成本）</div>
+          <canvas id="rot-chart" style="width:100%;height:320px"></canvas>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div class="section-title">参数敏感性（10 年总收益，N × 钝化阈值）</div>
+          <div id="rot-grid" style="overflow-x:auto"></div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div class="section-title">标的池与说明</div>
+          <div class="subtext" id="rot-pool"></div>
+          <div class="subtext" style="margin-top:8px">完整逻辑、全网调研与风险边界见 <b>reports/A股策略诊断与有效策略研究报告.html</b>。本策略默认不真实下单，仅供研究。</div>
+        </div>
+      </div>
+
+      <!-- 系统配置 -->
+      <div class="page" id="page-config">
+        <div class="hint" id="config-intro">配置中心：所有设置保存在本地 config/system.json，修改后即时生效（无需重启）。API 密钥仅本地保存、界面脱敏显示。环境变量 QIAO_* 优先级高于界面配置。</div>
+
+        <!-- 配置完成度检查 -->
+        <div class="card" style="margin-bottom:14px">
+          <div class="section-title">配置状态检查 <span class="badge blue" style="font-size:10px" id="config-mode-badge">-</span></div>
+          <div id="config-checks" class="grid g3"></div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+            <div class="section-title" style="margin:0">参数配置（按分类）</div>
+            <div style="display:flex;gap:8px">
+              <button class="btn ghost" onclick="resetConfig()">恢复默认</button>
+              <button class="btn green" onclick="saveConfig()" id="config-save-btn">保存并生效</button>
+            </div>
+          </div>
+          <div class="config-tabs" id="config-tabs"></div>
+          <div id="config-form" style="margin-top:16px"></div>
+          <div id="config-msg" style="margin-top:12px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 首次使用引导 -->
+<div id="onboarding" class="onboarding-mask" style="display:none">
+  <div class="onboarding-card">
+    <h2>欢迎使用 巧未来-波龙量化</h2>
+    <p class="onboarding-sub">专业量化研究 · 全市场选股 · 真实回测 · 严格的实盘执行边界</p>
+    <div id="onboarding-checks"></div>
+    <div class="onboarding-actions">
+      <button class="btn ghost" onclick="dismissOnboarding()">稍后再说</button>
+      <button class="btn green" onclick="goConfigFromOnboarding()">前往配置 →</button>
+    </div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+<script src="/config.js"></script>
+</body>
+</html>
